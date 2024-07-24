@@ -17,7 +17,7 @@ export default function Header() {
               <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
               <button class="btn btn-warning" type="submit">Search</button>
             </form>
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-auto d-flex justify-content-between">
+            {/* <ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-auto d-flex justify-content-between">
               <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="#">Home</a>
               </li>
@@ -38,7 +38,20 @@ export default function Header() {
               <li class="nav-item">
                 <a class="nav-link disabled" aria-disabled="true">Disabled</a>
               </li>
-            </ul>
+            </ul> */}
+          
+<div class="btn-group">
+  <button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+    Chung cu mini Ng Van Troi
+  </button>
+  <ul class="dropdown-menu">
+    <li><a class="dropdown-item" href="#">Chung cu 1</a></li>
+    <li><a class="dropdown-item" href="#">Chung cu 2</a></li>
+    <li><a class="dropdown-item" href="#">Chung cu 3</a></li>
+    <li><hr class="dropdown-divider"/></li>
+    <li><a class="dropdown-item" href="#">+ Them khu nha</a></li>
+  </ul>
+</div>
             <div class="d-flex align-items-center">
             <p class="mb-0" >Account name</p>
             <img src="path/to/your-image.jpg" class="rounded-circle ms-2" alt="" style={{width:'10px',height:'70%',backgroundColor:'red'}}/>

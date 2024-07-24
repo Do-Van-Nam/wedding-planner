@@ -25,8 +25,8 @@ export default function Home() {
   }
   return (
     <div class="d-flex justify-content-evenly align-items-center" style={{ height: '100vh', width: '100vw' }}>
-      {/* <Header/>
-      <Sidebar/> */}
+      <Header/>
+      <Sidebar/>
       <img src='images/image.png' class="img-thumbnail" alt="..." style={{ height: '40vw', width: '40vw' }}></img>
       <form onSubmit={handleSubmit} style={{ height: '20vw', width: '20vw' }} class="d-grid gap-2">
         <div class="mb-3">
