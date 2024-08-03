@@ -6,6 +6,9 @@ import reportWebVitals from './reportWebVitals';
 import {Route, Routes,BrowserRouter} from 'react-router-dom'
 import bootstrapmin from 'bootstrap/dist/css/bootstrap.min.css';
 import bootstrap from 'bootstrap'
+import 'bootstrap-icons/font/bootstrap-icons.css';
+
+
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

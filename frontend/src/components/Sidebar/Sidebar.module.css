@@ -7,8 +7,14 @@
     position: fixed;
     top: 0;
     left: 0;
+    padding-top: 20px;
+    margin-top: 60px;
+
 }
 
+.selected{
+    color: #ffc107;
+}
 
 .sidebar:hover {
     width: 200px;
@@ -37,7 +43,8 @@
 
 
 .nav_link:hover {
-    background-color: #495057;
+    background-color: #ffc107;
+    border-radius: 25px;
 }
 
 
