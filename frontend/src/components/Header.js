@@ -1,11 +1,45 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { AppContext } from '../AppContext';
+import axios from 'axios'
+import api from '../api'
+import { useNavigate } from 'react-router-dom'
+import BuildingPopup from './BuildingPopup';
+
 
 export default function Header() {
-  return (
+  const navigate = useNavigate()
 
+  const { acc, setAcc ,buildings, setBuildings} = useContext(AppContext);
+  const logOut = () => {
+    localStorage.clear()
+    setAcc({})
+    navigate('/')
+  }
+
+  const {selectedBuilding, setSelectedBuilding} = useContext(AppContext)
+  useEffect(() => {
+    console.log(acc)
+    if (acc && acc._id) {
+      api.get(`/building/${acc._id}`)
+        .then(response => {
+          setBuildings(response.data.buildings)
+          setSelectedBuilding(response.data.buildings[0])
+        })
+        .catch(error => {
+          console.error('Error fetching buildings by Owner ID:', error);
+        })
+    }
+
+  }, [acc])
+  const [isPopupVisible, setPopupVisible] = useState(false)
+  const hidePopup=()=> setPopupVisible(false)
+  const showPopup=()=> setPopupVisible(true)
+
+  return (
     <nav class="navbar fixed-top navbar-expand-lg bg-body-tertiary  
-      shadow p-2 mb-5 bg-body-tertiary rounded
-      " style={{ width: '100vw',zIndex:999, overflow:'hiden' }}>
+    shadow p-2 mb-5 bg-body-tertiary rounded
+    " style={{ width: '100vw', zIndex: 999, overflow: 'hiden' }}>
+       <BuildingPopup isVisible={isPopupVisible} type={'add'} onClose={hidePopup} />
       <div class="container-fluid d-flex justify-content-between align-items-center">
         <a class="navbar-brand" href="#">Motelly</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -21,24 +55,34 @@ export default function Header() {
           </form>
           <div class="btn-group">
             <button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-              Chung cu mini Ng Van Troi
+              {selectedBuilding.name}
             </button>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Chung cu 1</a></li>
-              <li><a class="dropdown-item" href="#">Chung cu 2</a></li>
-              <li><a class="dropdown-item" href="#">Chung cu 3</a></li>
+              {buildings.length > 0 && buildings.map(building => (
+                <li key={building._id}
+                onClick={()=>setSelectedBuilding(building)}
+                ><a class="dropdown-item" >{building.name}</a></li>
+
+              ))}
+
               <li><hr class="dropdown-divider" /></li>
-              <li><a class="dropdown-item" href="#">+ Them khu nha</a></li>
+              <li><a class="dropdown-item" onClick={showPopup}>+ Them khu nha</a></li>
             </ul>
             <div class="d-flex align-items-center ms-5 ">
               {/* <i class="bi bi-bell"></i> */}
               <i class="bi bi-bell-fill me-3 bi-lg" ></i>
               <div class='d-flex flex-column'>
-                <p class="m-0" >Account name</p>
-                <p class="m-0 fs-6" >Role</p>
+                <p class="m-0" >{acc ? acc.phone : '123'}</p>
+                <p class="m-0 fs-6" >{acc ? acc.role : 'some'}</p>
               </div>
 
-              <img src='images/image.png' class="rounded-circle ms-2" alt="" style={{ height: '35px' }} />
+              <div class="rounded-circle ms-2 me-2" alt="" style={{ height: '35px' }} >
+                <i class="bi bi-person-circle bi-lg" style={{ fontSize: '25px' }}></i>
+                <button class="btn btn-warning" onClick={logOut}>Dang xuat</button>
+
+              </div>
+
+
             </div>
           </div>
 
