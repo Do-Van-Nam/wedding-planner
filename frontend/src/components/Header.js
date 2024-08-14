@@ -4,19 +4,25 @@ import axios from 'axios'
 import api from '../api'
 import { useNavigate } from 'react-router-dom'
 import BuildingPopup from './BuildingPopup';
-
+import Cookies from 'js-cookie'
 
 export default function Header() {
   const navigate = useNavigate()
 
-  const { acc, setAcc ,buildings, setBuildings} = useContext(AppContext);
-  const logOut = () => {
-    localStorage.clear()
-    setAcc({})
-    navigate('/')
+  const { acc, setAcc, buildings, setBuildings } = useContext(AppContext);
+  const logOut = async () => {
+    try {
+      await api.post('/logout')
+      localStorage.clear()
+      setAcc({})
+      navigate('/')
+    } catch (error) {
+      console.log(error)
+    }
+
   }
 
-  const {selectedBuilding, setSelectedBuilding} = useContext(AppContext)
+  const { selectedBuilding, setSelectedBuilding } = useContext(AppContext)
   useEffect(() => {
     console.log(acc)
     if (acc && acc._id) {
@@ -32,14 +38,14 @@ export default function Header() {
 
   }, [acc])
   const [isPopupVisible, setPopupVisible] = useState(false)
-  const hidePopup=()=> setPopupVisible(false)
-  const showPopup=()=> setPopupVisible(true)
+  const hidePopup = () => setPopupVisible(false)
+  const showPopup = () => setPopupVisible(true)
 
   return (
     <nav class="navbar fixed-top navbar-expand-lg bg-body-tertiary  
     shadow p-2 mb-5 bg-body-tertiary rounded
     " style={{ width: '100vw', zIndex: 999, overflow: 'hiden' }}>
-       <BuildingPopup isVisible={isPopupVisible} type={'add'} onClose={hidePopup} />
+      <BuildingPopup isVisible={isPopupVisible} type={'add'} onClose={hidePopup} />
       <div class="container-fluid d-flex justify-content-between align-items-center">
         <a class="navbar-brand" href="#">Motelly</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -60,7 +66,7 @@ export default function Header() {
             <ul class="dropdown-menu">
               {buildings.length > 0 && buildings.map(building => (
                 <li key={building._id}
-                onClick={()=>setSelectedBuilding(building)}
+                  onClick={() => setSelectedBuilding(building)}
                 ><a class="dropdown-item" >{building.name}</a></li>
 
               ))}

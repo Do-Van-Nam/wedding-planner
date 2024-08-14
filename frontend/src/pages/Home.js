@@ -1,7 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react'
 import axios from 'axios'
+import Cookies from 'js-cookie'
 import { AppContext } from '../AppContext'
 import { useNavigate } from 'react-router-dom'
+
 
 export default function Home() {
   const navigate = useNavigate()
@@ -15,9 +17,10 @@ export default function Home() {
       const response = await axios.post('http://localhost:5713/login', {
         phone: phone,
         password: password
-      })
-      const { token, user } = response.data
-      localStorage.setItem('jwt', token)
+      }, {withCredentials:true})
+      const { user } = response.data
+
+      // localStorage.setItem('jwt', token)
       localStorage.setItem('role', user.role)
       localStorage.setItem('phone', phone)
       setAcc(user)
