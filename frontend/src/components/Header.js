@@ -9,7 +9,7 @@ import Cookies from 'js-cookie'
 export default function Header() {
   const navigate = useNavigate()
 
-  const { acc, setAcc, buildings, setBuildings } = useContext(AppContext);
+  const { acc, setAcc, buildings, setBuildings, selectedBuilding, setSelectedBuilding } = useContext(AppContext);
   const logOut = async () => {
     try {
       await api.post('/logout')
@@ -22,7 +22,6 @@ export default function Header() {
 
   }
 
-  const { selectedBuilding, setSelectedBuilding } = useContext(AppContext)
   useEffect(() => {
     console.log(acc)
     if (acc && acc._id) {
@@ -35,8 +34,8 @@ export default function Header() {
           console.error('Error fetching buildings by Owner ID:', error);
         })
     }
-
   }, [acc])
+
   const [isPopupVisible, setPopupVisible] = useState(false)
   const hidePopup = () => setPopupVisible(false)
   const showPopup = () => setPopupVisible(true)
@@ -44,7 +43,7 @@ export default function Header() {
   return (
     <nav class="navbar fixed-top navbar-expand-lg bg-body-tertiary  
     shadow p-2 mb-5 bg-body-tertiary rounded
-    " style={{ width: '100vw', zIndex: 999, overflow: 'hiden' }}>
+    " style={{ width: '100vw', zIndex: '999' }}>
       <BuildingPopup isVisible={isPopupVisible} type={'add'} onClose={hidePopup} />
       <div class="container-fluid d-flex justify-content-between align-items-center">
         <a class="navbar-brand" href="#">Motelly</a>

@@ -1,60 +1,91 @@
-import React, {useContext, useState} from 'react';
+import React, { useContext, useState } from 'react';
 import api from '../api';
 import { AppContext } from '../AppContext';
+import QuickAddRoomPopup from './QuickAddRoomPopup';
 
+export default function AddRoomPopup({ isVisible, onClose,floor }) {
+  const [roomName, setRoomName] = useState('')
+  const [quickAdd, setQuickAdd] = useState(false)
+  const [addPopup, setAddPopup] = useState(true)
+  const [name, setName] = useState('')
 
-export default function AddRoomPopup({isVisible,onClose}) {
-  const [name,setName] = useState('')
-  const [address,setAddress] = useState('')
-  const [noFloor,setNoFLoor] = useState(0)
-  const [noRoom,setNoRoom] = useState(0)
-  const {acc} = useContext(AppContext)
-  if(!isVisible) return null 
+  const [phone, setPhone] = useState('')
+  const [price, setPrice] = useState(0)
+  const { acc,selectedBuilding } = useContext(AppContext)
+  if (!isVisible) return null
 
-
-    const handleAddBuilding=async ()=>{
-      try {
-        const response = await api.post('/building',{
-        name,address,noFloor,noRoom,ownerId:acc._id
+  function generateRandomString(length) {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let randomString = '';
+    for (let i = 0; i < length; i++) {
+        const randomIndex = Math.floor(Math.random() * characters.length);
+        randomString += characters.charAt(randomIndex);
+    }
+    return randomString;
+}
+  const handleAddRoom = async () => {
+    try {
+      const accResponse = await api.post('/acc',{
+        name,phone, password: generateRandomString(8), role: 'tenant' 
+      })
+      const roomResponse = await api.post('/room', {
+        roomName,customerId:accResponse.data.acc._id,
+        buildingId:selectedBuilding._id,
+        floor:floor,isRented: true,price,startday:new Date(),noPrepaidMonths:0
       })
       onClose()
-      } catch (error) {
-        console.log(error)
-      }
-      
+    } catch (error) {
+      console.log(error)
     }
 
-    return (
-        
- <div class='position-fixed top-50 start-50 translate-middle
-        shadow p-3 mb-5 bg-body-tertiary  rounded p-3 d-flex  flex-column
-        justify-content-around align-items-center flex-wrap'
-        style={{ height: '45vh', width: '40vw', zIndex: '999' }}>
-        <button className="btn btn-warning position-absolute top-0 start-100 translate-middle rounded-circle"
-          onClick={onClose}
-        >X</button>
-        <h2> thong tin toa nha</h2>
+  }
+const hideQuickAdd=()=>{
+  setQuickAdd(false)
+}
+  return (
+<>
+    {!quickAdd && 
+    <div class='position-fixed top-50 start-50 translate-middle
+    shadow p-3 mb-5 bg-body-tertiary  rounded p-3 d-flex  flex-column
+    justify-content-around align-items-center flex-wrap  '
+    style={{ height: '60vh', width: '40vw', zIndex: '999', }}>
 
-        <input type="text" style={{ width: '80%' }} class="form-control mb-3" 
-        placeholder="Ten toa nha" aria-label="Username" 
-        aria-describedby="basic-addon1"  onChange={e=>setName(e.target.value)}/>
-        <input type="text" style={{ width: '80%' }} class="form-control mb-3" placeholder="Dia chi" aria-label="Address" aria-describedby="basic-addon1" onChange={e=>setAddress(e.target.value)}/>
+    {/* <QuickAddRoomPopup isVisible={quickAdd} onClose={hideQuickAdd}/> */}
+      <button className="btn btn-warning position-absolute top-0 start-100 translate-middle rounded-circle"
+        onClick={onClose}
+      >X</button>
+      <div className='d-flex flex-row'>
 
-        <div class="input-group mb-3" style={{ width: '80%' }}>
-  <input type="number" class="form-control" placeholder="So tang" aria-label="Username" onChange={e=>setNoFLoor(e.target.value)}/>
-  <span class="input-group-text me-2" >tang</span>
-  <input type="number" class="form-control" placeholder="So phong" aria-label="Server" onChange={e=>setNoRoom(e.target.value)}/>
-  <span class="input-group-text" >phong</span>
-
-</div>
-
-        <div class='d-flex justify-content-around'>
-          <button className="btn btn-warning " onClick={handleAddBuilding}>Them toa nha</button>
-           
-        
-
-        </div>
+      <h2>Them phong</h2>
+      <button className="btn btn-warning ms-2" onClick={()=>{
+        setQuickAdd(true)
+        // setAddPopup(false)
+        }}>Them nhanh</button>
       </div>
-    )
-} 
+
+      <input type="text" style={{ width: '80%' }} class="form-control mb-3"
+        placeholder="Ten phong" aria-label="Username"
+        aria-describedby="basic-addon1" onChange={e => setRoomName(e.target.value)} />
+      <input type="text" style={{ width: '80%' }} class="form-control mb-3"
+        placeholder="Nguoi thue" aria-label="Address" aria-describedby="basic-addon1" onChange={e => setName(e.target.value)} />
+      <input type="text" style={{ width: '80%' }} class="form-control mb-3"
+        placeholder="So dien thoai" aria-label="Address" aria-describedby="basic-addon1" onChange={e => setPhone(e.target.value)} />
+
+      <div class="input-group mb-3" style={{ width: '80%' }}>
+        <input type="number" class="form-control" placeholder="Gia phong" aria-label="Username" onChange={e => setPrice(e.target.value)} />
+        <span class="input-group-text me-2" >dong/thang</span>
+      </div>
+
+      <div class='d-flex justify-content-around'>
+        <button className="btn btn-warning " onClick={handleAddRoom}>Them</button>
+
+
+
+      </div>
+    </div>
+}
+    {quickAdd && <QuickAddRoomPopup isVisible={quickAdd} onClose={hideQuickAdd}/>}
     
+</>
+  )
+}

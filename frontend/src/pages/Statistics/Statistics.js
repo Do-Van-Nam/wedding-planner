@@ -11,8 +11,8 @@ export default function Problems() {
 
   return (
     <div class="d-flex flex-column justify-content-evenly align-items-center" style={{ height: '100vh', width: '100vw' }}>
-      <Header />
-      <Sidebar />
+      {/* <Header /> */}
+      {/* <Sidebar /> */}
       <div class='position-relative shadow p-4  bg-body-tertiary  rounded p-3 d-flex flex-column ' style={{ width: '40vw' }}>
         <p>Tong so phong: 30</p>
         <p>So phong duoc thue: 20</p>

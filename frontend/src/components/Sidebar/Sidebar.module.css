@@ -3,13 +3,13 @@
     height: 100vh;
     background-color: #f8f9fa;
     transition: width 0.3s;
-    overflow-x: hidden;
+    /* overflow-x: hidden; */
     position: fixed;
     top: 0;
     left: 0;
     padding-top: 20px;
     margin-top: 60px;
-
+    z-index: 100;
 }
 
 .selected{

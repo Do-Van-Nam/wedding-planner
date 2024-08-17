@@ -9,9 +9,10 @@ import AddRoomPopup from '../../components/AddRoomPopup'
 
 export default function Rooms() {
   const [popup, setPopup] = useState(false)
+  const [floor, setFLoor] = useState(0)
   const [addRoomPopupVisible, setAddRoomPopupVisible] = useState(false)
   const [popupData, setPopupData] = useState(null)
-  const {acc,setAcc,selectedBuilding,rooms} = useContext(AppContext)
+  const { acc, setAcc, selectedBuilding, rooms } = useContext(AppContext)
 
   const RoomPopup = ({ room }) => {
     return (
@@ -49,7 +50,7 @@ export default function Rooms() {
       )
     )
   }
-  const hideAddRoomPopup=()=>setAddRoomPopupVisible(false)
+  const hideAddRoomPopup = () => setAddRoomPopupVisible(false)
   const floors = Array.from({ length: selectedBuilding.noFloor }, (__, index) => selectedBuilding.noFloor - index)
   const handlePopup = (room) => {
     setPopupData(room)
@@ -57,11 +58,12 @@ export default function Rooms() {
   }
   return (
     <div class="d-flex justify-content-evenly align-items-center" style={{ height: '100vh', width: '100vw' }}>
-      <Header />
-      <Sidebar />
-<AddRoomPopup isVisible={addRoomPopupVisible} onClose={hideAddRoomPopup}/>
+      {/* <Header /> */}
+      {/* <Sidebar /> */}
+      <AddRoomPopup isVisible={addRoomPopupVisible} onClose={hideAddRoomPopup} floor={floor}/>
       {popup && <RoomPopup room={popupData} />}
-      <div class='position-relative shadow p-3 mb-5 bg-body-tertiary  rounded p-3 d-flex flex-column ' style={{ width: '80vw' }}>
+      <div class='position-relative shadow p-3 mb-5 bg-body-tertiary  rounded p-3 d-flex flex-column '
+       style={{ width: '80vw' }}>
         <div style={{ fontSize: '25px' }}>
           <i class="bi bi-pencil-square bi-lg position-absolute top-0 end-0 m-3"></i>
         </div>
@@ -87,7 +89,7 @@ export default function Rooms() {
                       <td
                         style={!room.isRented ? { backgroundColor: '#e1e1e1' } : {}}
                         className={style.cell}
-                        onClick={() => handlePopup(room)}
+                        onClick={() =>{setFLoor(i); handlePopup(room)}}
                       >
                         <div class='d-flex align-items-center'>
                           <button className="btn btn-warning " style={{ height: '50%' }}>{room.roomName}</button>
@@ -100,9 +102,9 @@ export default function Rooms() {
                     ))
                   }
                   <td scope="row" class={`text-center align-middle ${style.cell}`}
-                  onClick={()=>setAddRoomPopupVisible(true)}
+                    onClick={() => setAddRoomPopupVisible(true)}
                   >+</td>
- 
+
                 </tr>
               ))
             }
