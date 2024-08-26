@@ -36,6 +36,21 @@ export default function Header() {
     }
   }, [acc])
 
+  useEffect(()=>{
+    try {
+      api.get('/acc/check-auth')
+      .then(response=>{
+        setAcc(response.data.user)
+      })
+      .catch(error=>
+        console.log(error)
+      )
+    } catch (error) {
+      console.log(error)
+    }
+    console.log(acc)
+  },[])
+
   const [isPopupVisible, setPopupVisible] = useState(false)
   const hidePopup = () => setPopupVisible(false)
   const showPopup = () => setPopupVisible(true)

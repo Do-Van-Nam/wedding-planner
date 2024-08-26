@@ -21,38 +21,42 @@ export default function Manager() {
             )
     }, [selectedBuilding])
     const floors = Array.from({ length: selectedBuilding.noFloor }, (__, index) => selectedBuilding.noFloor - index)
-    const hideEditBuildingPopup = ()=>{
+    const hideEditBuildingPopup = () => {
         setEditBuildingPopup(false)
     }
-    const hideDeleteBuildingPopup = ()=>{
+    const hideDeleteBuildingPopup = () => {
         setDeleteBuildingPopup(false)
     }
     return (
         <div class='container-fluid d-flex flex-wrap justify-content-center align-items-center' style={{ padding: '12vh' }}>
-            {/* <Header /> */}
-            {/* <Sidebar /> */}
-            <BuildingPopup type={'edit'}  isVisible={editBuildingPopup} onClose={hideEditBuildingPopup}/>
-            <BuildingPopup type={'delete'}  isVisible={deleteBuildingPopup} onClose={hideDeleteBuildingPopup}/>
+            <BuildingPopup type={'edit'} isVisible={editBuildingPopup} onClose={hideEditBuildingPopup} />
+            <BuildingPopup type={'delete'} isVisible={deleteBuildingPopup} onClose={hideDeleteBuildingPopup} />
             <div class='position-relative shadow-lg p-3 mb-5 bg-body-tertiary  rounded p-3 d-flex flex-column justify-content-center'
-                style={{ height: '40vh', width: '35vw', marginRight: '2vw' }}>
-                <div style={{ fontSize: '25px' ,cursor:'pointer'}} 
-                class='position-absolute top-0 end-0 m-3'
+                style={{ height: '40vh', width: '72vw',  }}>
+                <div style={{ fontSize: '25px', cursor: 'pointer' }}
+                    class='position-absolute top-0 end-0 m-3'
                 >
-                <i onClick={()=>setEditBuildingPopup(true)} class="bi bi-pencil-square bi-lg m-3"></i>
-                <i onClick={()=>setDeleteBuildingPopup(true)} class="bi bi-trash bi-lg  me-3"></i>
+                    <i onClick={() => setEditBuildingPopup(true)} class="bi bi-pencil-square bi-lg m-3"></i>
+                    <i onClick={() => setDeleteBuildingPopup(true)} class="bi bi-trash bi-lg  me-3"></i>
                 </div>
-                <h3>{selectedBuilding.name}</h3>
-                <h2>Dia chi: {selectedBuilding.address}</h2>
-                <h2>So tang: {selectedBuilding.noFloor}</h2>
-                <h2>So phong: {selectedBuilding.noRoom}</h2>
+                <h1 className='ms-3'>{selectedBuilding.name}</h1>
+                <h2 className='ms-3 mb-5'> {selectedBuilding.address}</h2>
+                <div className='d-flex flex-row justify-content-around'>
+                    <button className="btn btn-warning ms-1" style={{width:'25%'}}>  
+                        <h1>{selectedBuilding.noFloor}</h1><h2>  tang  </h2>
+                    </button>
+                    <button className="btn btn-warning ms-2" style={{width:'25%'}}>
+                        <h1>{selectedBuilding.noRoom}</h1>  <h2>phong</h2>
+
+
+                    </button>
+                    <button className="btn btn-warning ms-2" style={{width:'25%'}}>
+                        <h1>{selectedBuilding.noFloor}</h1> <h2>phong trong</h2>
+                    </button>
+                </div>
+
             </div>
-            <div class='shadow p-3 mb-5 bg-body-tertiary  rounded p-3 d-flex flex-column justify-content-center'
-                style={{ height: '40vh', width: '35vw' }}>
-                <h3>Ten Toa Nha</h3>
-                <h2>Dia chi: Nguyen Van Troi</h2>
-                <h2>So tang: 7</h2>
-                <h2>So phong: 123</h2>
-            </div>
+
             <div class='position-relative shadow p-3 mb-5 bg-body-tertiary  rounded p-3 d-flex flex-column justify-content-center'
                 style={{ height: 'auto', width: '72vw' }}>
                 <div style={{ fontSize: '25px' }}>
@@ -75,7 +79,7 @@ export default function Manager() {
                                         rooms.filter((room, index) =>
                                             room.floor === i
                                         ).map((room, index) => (
-                                            <td class='text-center align-middle'
+                                            <td class='text-center align-middle' key={index}
                                                 style={!room.isRented ? { backgroundColor: '#e1e1e1' } : {}}
                                             >{room.roomName}</td>
                                         ))

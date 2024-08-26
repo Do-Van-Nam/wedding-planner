@@ -106,7 +106,10 @@ export default function BuildingPopup({ type, isVisible, onClose }) {
         <button className="btn btn-warning " onClick={handleEditBuilding}>Sua toa nha</button>
         }
         {type === 'delete' &&
-        <button className="btn btn-warning " onClick={handleDeleteBuilding}>Xoa toa nha</button>
+        <>
+        <button className="btn btn-warning " style={{width:'10vw'}} onClick={handleDeleteBuilding}>Xoa toa nha</button>
+        <button className="btn btn-warning ms-5" style={{width:'10vw'}} onClick={onClose}>Huy bo</button>
+        </>
         }
       </div>
     </div>
