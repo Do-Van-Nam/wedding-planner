@@ -4,19 +4,21 @@ import { AppContext } from '../AppContext';
 
 
 export default function QuickAddRoomPopup({ isVisible, onClose }) {
-  const [name, setName] = useState('')
-  const [address, setAddress] = useState('')
-  const [noFloor, setNoFLoor] = useState(0)
-  const [noRoom, setNoRoom] = useState(0)
-  const { acc } = useContext(AppContext)
+
+  const [noFloo, setNoFLoor] = useState(0)
+  const [noRoomPerFloor, setNoRoomPerFloor] = useState(0)
+  const [price, setPrice] = useState(0)
+  const { acc,selectedBuilding } = useContext(AppContext)
   if (!isVisible) return null
 
 
-  const handleAddBuilding = async () => {
+  const handleQuickAddRooms = async () => {
     try {
-      const response = await api.post('/building', {
-        name, address, noFloor, noRoom, ownerId: acc._id
+      api.post('/room/quickCreate', {
+        noFloor:selectedBuilding.noFloor, noRoomPerFloor,price,buildingId:selectedBuilding._id
       })
+      .then()
+      .catch(error => console.log(error))
       onClose()
     } catch (error) {
       console.log(error)
@@ -37,10 +39,10 @@ export default function QuickAddRoomPopup({ isVisible, onClose }) {
 
       <div class="input-group mb-3" style={{ width: '80%' }}>
         <span class="input-group-text " >So phong moi tang</span>
-        <input type="number" class="form-control" placeholder="" aria-label="Username" onChange={e => setNoFLoor(e.target.value)} />
+        <input type="number" class="form-control" placeholder="" aria-label="Username" onChange={e => setNoRoomPerFloor(e.target.value)} />
       </div>
       <div class="input-group mb-3" style={{ width: '80%' }}>
-        <input type="number" class="form-control" placeholder="Gia phong" aria-label="Username" onChange={e => setNoFLoor(e.target.value)} />
+        <input type="number" class="form-control" placeholder="Gia phong" aria-label="Username" onChange={e => setPrice(e.target.value)} />
         <span class="input-group-text me-2" >dong/thang</span>
       </div>
       <p>Ten phong</p>
@@ -55,7 +57,7 @@ export default function QuickAddRoomPopup({ isVisible, onClose }) {
 
 
       <div class='d-flex justify-content-around'>
-        <button className="btn btn-warning " onClick={handleAddBuilding}>Them</button>
+        <button className="btn btn-warning " onClick={handleQuickAddRooms}>Them</button>
 
 
 
