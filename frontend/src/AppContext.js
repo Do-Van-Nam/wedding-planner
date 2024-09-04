@@ -9,10 +9,11 @@ const AppProvider = ({children})=>{
     const [rooms,setRooms] = useState([])
     const [selectedBuilding,setSelectedBuilding] = useState({})
 
+
     return (
         <AppContext.Provider 
         value={{acc,setAcc,buildings,setBuildings,selectedBuilding,setSelectedBuilding,
-            rooms,setRooms, floor,setFloor
+            rooms,setRooms, floor,setFloor,
         }}
         >
             {children}

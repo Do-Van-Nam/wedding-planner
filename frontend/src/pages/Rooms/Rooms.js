@@ -20,7 +20,7 @@ export default function Rooms() {
       .then(response=>{
         setRooms(response.data.rooms)
       })
-  },[])
+  },[selectedBuilding])
 
   const RoomPopup = ({ room }) => {
     return (
@@ -70,16 +70,14 @@ export default function Rooms() {
       {/* <Sidebar /> */}
       <AddRoomPopup isVisible={addRoomPopupVisible} onClose={hideAddRoomPopup}/>
       {popup && <RoomPopup room={popupData} />}
-      <div class='position-relative shadow p-3 mb-5 bg-body-tertiary  rounded p-3 d-flex flex-column '
-       style={{ width: '80vw' }}>
+      <div class=' shadow p-3  bg-body-tertiary  rounded p-3 d-flex flex-column '
+       style={{height:'80vh', width: '90vw',overflow:'scroll' }}>
 
         <table class="table table-bordered mt-5">
           <thead>
             <tr>
               <th scope="col" class="text-center align-middle w-10" style={{ width: '5%' }}>Tang</th>
-              <th colspan='3' class="text-center align-middle w-90">Phong
-              </th>
-              <th scope="col" class="text-center align-middle w-10" style={{ width: '3%' }}></th>
+              <th  class="text-center align-middle w-90">Phong</th>
 
             </tr>
           </thead>
@@ -87,7 +85,7 @@ export default function Rooms() {
             {
               floors.map(i => (
                 <tr key={i}  >
-                  <th scope="row" class="text-center align-middle ">{i}</th>
+                  <th scope="row" class="text-center align-middle " >{i}</th>
                   {
                     rooms.filter((room, index) =>
                       room.floor === i
