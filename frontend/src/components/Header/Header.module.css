@@ -1,0 +1,15 @@
+.headeritem {
+    cursor: pointer;
+}
+
+.headeritem:hover {
+    border-bottom: 2px solid black;
+}
+
+.hoverUnderline {
+    text-decoration: none;
+}
+
+.hoverUnderline:hover {
+    text-decoration: underline;
+}

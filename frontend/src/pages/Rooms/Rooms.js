@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import axios from 'axios'
 import Sidebar from '../../components/Sidebar/Sidebar'
-import Header from '../../components/Header'
+import Header from '../../components/Header/Header'
 // import RoomPopup from '../../components/RoomPopup'
 import style from './rooms.module.css'
 import { AppContext } from '../../AppContext'

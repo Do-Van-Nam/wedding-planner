@@ -1,13 +1,13 @@
 import './App.css';
 import { useState, useEffect, useContext } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom'
-import Home from './pages/Home'
-import Manager from './pages/Manager/Manager'
+import LoginRegister from './pages/LoginRegister'
+import Home from './pages/Home/Home'
 import Tenant from './pages/Tenant'
 import Rooms from './pages/Rooms/Rooms'
 import Problems from './pages/Problems/Problems'
 import Statistics from './pages/Statistics/Statistics'
-import Header from './components/Header';
+import Header from './components/Header/Header';
 import Sidebar from './components/Sidebar/Sidebar';
 import api from './api';
 import PrivateRoute from './PrivateRoute';
@@ -20,11 +20,11 @@ function App() {
   
   return (
     <AppProvider>
-      {location.pathname !== '/' && <Header />}
-      {location.pathname !== '/' && <Sidebar />}
+      {/* {location.pathname !== '/' && <Header />} */}
+      <Header/>
       <Routes >
-        <Route path='/' element={<Home />} />
-          <Route path='/manager' element={<Manager />} />
+        <Route path='/' element={<LoginRegister />} />
+          <Route path='/home' element={<Home />} />
           <Route path='/manager/rooms' element={<Rooms />} />
           <Route path='/manager/problems' element={<Problems />} />
           <Route path='/manager/statistics' element={<Statistics />} />
