@@ -28,19 +28,35 @@ export default function Manager() {
     // const hideDeleteBuildingPopup = () => {
     //     setDeleteBuildingPopup(false)
     // }
+    const vendors = [
+       { vendor: 'Nhiếp Ảnh Gia', icon: 'bi-camera-fill' },   // Icon: Máy ảnh
+  { vendor: 'Tiệc Cưới', icon: 'bi-cake-fill' },        // Icon: Ly rượu
+  { vendor: 'Áo Cưới', icon: 'bi-person-fill' },         // Icon: Người
+  { vendor: 'Nhà Tổ Chức', icon: 'bi-building-fill' }, // Icon: Nhóm người
+  { vendor: 'Bánh Cưới', icon: 'bi-cake-fill' },          // Icon: Túi bánh
+  { vendor: 'DJ', icon: 'bi-disc-fill' },        // Icon: Nốt nhạc
+  { vendor: 'Quay Phim', icon: 'bi-film' },              // Icon: Cuộn phim
+  { vendor: 'Đồ Cưới', icon: 'bi-shop-window' }, // Icon: Cửa hàng
+  { vendor: 'Trang Điểm', icon: 'bi-brush-fill' }, // Icon: Bút cọ trang điểm
+  { vendor: 'Hoa Cưới', icon: 'bi-flower1' },             // Icon: Hoa
+  { vendor: 'Ban Nhạc', icon: 'bi-music-note-list' },     // Icon: Danh sách nhạc
+  { vendor: 'Quay Bar', icon: 'bi-cup-straw' },   // Icon: Ly uống
+  { vendor: 'Rước Dâu', icon: 'bi-truck' },               // Icon: Xe tải
+  { vendor: 'Thiệp Cưới', icon: 'bi-envelope-fill' },     // Icon: Phong bì
+    ]
     const [venueExpanded, setVenueExpanded] = useState(true)
-    const [editWeddingInfoVisible,setEditWeddingInfoVisible ] = useState(false)
+    const [editWeddingInfoVisible, setEditWeddingInfoVisible] = useState(false)
     const toggleVenueBoxSize = () => setVenueExpanded(!venueExpanded)
-    const closeEditWeddingInfo = ()=> setEditWeddingInfoVisible(false)
+    const closeEditWeddingInfo = () => setEditWeddingInfoVisible(false)
     return (
         <div class=' d-flex flex-wrap justify-content-evenly align-items-start'
-            style={{ padding:'0', margin: '0',border:'0', backgroundColor: "#f1ece4" }}>
+            style={{ padding: '0', margin: '0', border: '0', backgroundColor: "#f1ece4" }}>
 
-<EditWeddingInfo isVisible={editWeddingInfoVisible} onClose={closeEditWeddingInfo}/>
+            <EditWeddingInfo isVisible={editWeddingInfoVisible} onClose={closeEditWeddingInfo} />
             <div className='wedding-info d-flex flex-column justify-content-between align-items-center'
-                style={{ cursor:'pointer', backgroundColor: "#f1ece4", width: '90vw', maxWidth: '90vw', marginTop: '15vh' }}
-                onClick={()=>setEditWeddingInfoVisible(true)}
-           >
+                style={{ cursor: 'pointer', backgroundColor: "#f1ece4", width: '90vw', maxWidth: '90vw', marginTop: '15vh' }}
+                onClick={() => setEditWeddingInfoVisible(true)}
+            >
                 <h3>108 DAYS TO GO!</h3>
                 <h1>Khoi & Phuong</h1>
                 <div className='d-flex'>
@@ -54,7 +70,7 @@ export default function Manager() {
             <h4 style={{ width: '80%' }}>Kế hoạch tổ chức đám cưới</h4>
 
             <div className='left-side d-flex flex-column '
-                
+
             >
                 <div className='budget shadow p-3 mb-5 bg-body-tertiary rounded'
                     style={{
@@ -66,10 +82,10 @@ export default function Manager() {
                         transition: 'max-height 1s ease-in-out',
                     }}>
                     <div className='d-flex justify-content-between align-items-center'>
-                        <div 
-                            style={{  fontSize: '24px', fontWeight: '600', paddingBottom: '10px' }}
+                        <div
+                            style={{ fontSize: '24px', fontWeight: '600', paddingBottom: '10px' }}
                         >
-                            Ngân sách 
+                            Ngân sách
                         </div>
 
                     </div>
@@ -104,13 +120,13 @@ export default function Manager() {
                             Địa điểm {venueExpanded ? <i className="bi bi-caret-up"></i> : <i className="bi bi-caret-down"></i>}
                         </div>
                         <button type="button" className="btn btn-lg rounded-pill"
-                            style={{ boxSizing:'border-box', backgroundColor: '#ff44cb', color: 'white', fontWeight: '500', padding: '10px 20px' }}>
+                            style={{ boxSizing: 'border-box', backgroundColor: '#ff44cb', color: 'white', fontWeight: '500', padding: '10px 20px' }}>
                             Tìm địa điểm
                         </button>
                     </div>
 
                     <div style={{ fontSize: '16px', color: '#555', marginBottom: '10px' }}>
-                        Tìm địa điểm thích hợp để tổ chức lễ kỷ niệm.
+                        Tìm địa điểm thích hợp để tổ chức lễ cưới.
                     </div>
 
                     <div className='d-flex justify-content-between align-items-center' style={{ marginBottom: '10px' }}>
@@ -138,8 +154,8 @@ export default function Manager() {
 
             </div>
             <div className='right-side d-flex flex-column '
-           
-                >
+
+            >
                 <div className='vendors shadow p-3 mb-5 bg-body-tertiary rounded p-3'
                     style={{
                         width: '43vw',
@@ -157,30 +173,42 @@ export default function Manager() {
                         </div>
                         <button type="button" className="btn btn-lg rounded-pill"
                             style={{ backgroundColor: '#ff44cb', color: 'white', fontWeight: '500', padding: '10px 20px' }}>
-                            Tìm địa điểm
+                            Tìm Nhà cung cấp
                         </button>
                     </div>
 
                     <div style={{ fontSize: '16px', color: '#555', marginBottom: '10px' }}>
-                        Tìm địa điểm thích hợp để tổ chức lễ kỷ niệm.
+                        Tìm các nhà cung cấp dịch vụ cho lễ cưới.
                     </div>
 
                     <div className='d-flex justify-content-between align-items-center' style={{ marginBottom: '10px' }}>
-                        <div style={{ fontSize: '14px', fontWeight: '700', color: '#333' }}>Khám phá các địa điểm</div>
+                        <div style={{ fontSize: '14px', fontWeight: '700', color: '#333' }}>Khám phá các Nhà cung cấp</div>
                         <a href="" style={{ fontSize: '14px', color: '#ff44cb' }}>
                             Xem tất cả
                         </a>
                     </div>
 
-                    <div className='location-info d-flex flex-column align-items-center' style={{ marginBottom: '10px' }}>
-                        <h4 style={{ fontSize: '18px', fontWeight: '500', color: '#333' }}>Wedding Planner</h4>
-                        <h4 style={{ fontSize: '16px', color: '#555' }}>Bạn chưa chọn địa điểm tổ chức đám cưới</h4>
-                        <h4 style={{ fontSize: '16px', color: '#555' }}>Thử nội dung khác</h4>
+                    <div className='location-info d-flex flex-wrap align-items-center' style={{ marginBottom: '10px', width: '100%' }}>
+                        
+
+
+                        {vendors.map((e,i)=>(
+                            <div className='d-flex flex-column align-items-center ms-2 me-2'
+                            style={{width:'20%'}}
+                            >
+                            <div className='d-flex justify-content-center align-items-center rounded'
+                                style={{ width: '80px', height: '80px', backgroundColor: 'black' }}
+                            >
+                                <i class={e.icon} style={{ color: 'white', fontSize: '30px' }}></i>
+                            </div>
+                            <p>{e.vendor}</p>
+                        </div>
+                        ))}
                     </div>
 
                     <div className='d-flex flex-column align-items-center'>
                         <a href="" style={{ fontSize: '16px', color: '#ff44cb', textAlign: 'center' }}>
-                            Đã thuê địa điểm? Thêm thông tin địa điểm tổ chức
+                            Đã thuê nhà cung cấp dịch vụ? Thêm thông tin nhà cung cấp dịch vụ
                         </a>
                         <a href="" onClick={toggleVenueBoxSize} style={{ fontSize: '16px', color: '#ff44cb', marginTop: '10px' }}>
                             Ẩn bớt
@@ -204,16 +232,16 @@ export default function Manager() {
                         </div>
                         <button type="button" className="btn btn-lg rounded-pill"
                             style={{ backgroundColor: '#ff44cb', color: 'white', fontWeight: '500', padding: '10px 20px' }}>
-                            Tìm địa điểm
+                            Tìm Trang phục và Nhẫn
                         </button>
                     </div>
 
                     <div style={{ fontSize: '16px', color: '#555', marginBottom: '10px' }}>
-                        Tìm địa điểm thích hợp để tổ chức lễ kỷ niệm.
+                        Tìm Trang phục và Nhẫn cho lễ cưới.
                     </div>
 
                     <div className='d-flex justify-content-between align-items-center' style={{ marginBottom: '10px' }}>
-                        <div style={{ fontSize: '14px', fontWeight: '700', color: '#333' }}>Khám phá các địa điểm</div>
+                        <div style={{ fontSize: '14px', fontWeight: '700', color: '#333' }}>Khám phá các Trang phục và Nhẫn</div>
                         <a href="" style={{ fontSize: '14px', color: '#ff44cb' }}>
                             Xem tất cả
                         </a>
@@ -221,13 +249,13 @@ export default function Manager() {
 
                     <div className='location-info d-flex flex-column align-items-center' style={{ marginBottom: '10px' }}>
                         <h4 style={{ fontSize: '18px', fontWeight: '500', color: '#333' }}>Wedding Planner</h4>
-                        <h4 style={{ fontSize: '16px', color: '#555' }}>Bạn chưa chọn địa điểm tổ chức đám cưới</h4>
+                        <h4 style={{ fontSize: '16px', color: '#555' }}>Bạn chưa chọn Trang phục và Nhẫn</h4>
                         <h4 style={{ fontSize: '16px', color: '#555' }}>Thử nội dung khác</h4>
                     </div>
 
                     <div className='d-flex flex-column align-items-center'>
                         <a href="" style={{ fontSize: '16px', color: '#ff44cb', textAlign: 'center' }}>
-                            Đã thuê địa điểm? Thêm thông tin địa điểm tổ chức
+                            Đã có Trang phục và Nhẫn cưới? Thêm thông tin
                         </a>
                         <a href="" onClick={toggleVenueBoxSize} style={{ fontSize: '16px', color: '#ff44cb', marginTop: '10px' }}>
                             Ẩn bớt

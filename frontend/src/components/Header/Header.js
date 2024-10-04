@@ -71,7 +71,7 @@ export default function Header() {
       "Rước Dâu", "Thiệp cưới"]]
   }
   const planningTools={
-    categoryName:'Công cụ lập kế hoạch',
+    categoryName:'Kế hoạch',
     categoryItems: [['Kế hoạch của bạn','Checklist','Ngân sách'],
     
     ['Khách mời','Gửi lời tới khách mời'],
@@ -112,7 +112,7 @@ export default function Header() {
             Wedding Planner
           </div>
           <div className='d-flex' >
-            <h4 className={`me-3 ${style.headeritem}`} onClick={()=>toggleExpanded('planningTools')} >Công cụ lập kế hoạch</h4>
+            <h4 className={`me-3 ${style.headeritem}`} onClick={()=>toggleExpanded('planningTools')} >Kế hoạch</h4>
             <h4 className={`me-3 ${style.headeritem}`} onClick={()=>toggleExpanded('vendors')} >Nhà cung cấp</h4>
               <h4 className={`me-3 ${style.headeritem}` } onClick={()=>toggleExpanded('attireAndRings')} >Trang phục, Nhẫn</h4>
             <h4 className={`me-3 ${style.headeritem}`}>Lập kế hoạch tự động</h4>

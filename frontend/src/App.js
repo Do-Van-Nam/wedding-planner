@@ -29,6 +29,14 @@ function App() {
           <Route path='/manager/problems' element={<Problems />} />
           <Route path='/manager/statistics' element={<Statistics />} />
           <Route path='/tenant' element={<Tenant />} />
+          <Route path='/checklist'  />
+          <Route path='/budget'  />
+          <Route path='/vendor/venue'  />
+          <Route path='/vendor/photographer'  />
+          <Route path='/vendor/'  />
+          <Route path='/vendor/venue'  />
+          <Route path='/vendor/venue'  />
+          <Route path='/vendor/venue'  />
 
       </Routes>
     </AppProvider>
