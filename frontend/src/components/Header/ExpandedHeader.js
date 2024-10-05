@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import BuildingPopup from '../BuildingPopup';
 import Cookies from 'js-cookie'
 import style from './Header.module.css'
+import { Link } from 'react-router-dom';
 
 export default function ExpandedHeader({ category }) {
 
@@ -31,7 +32,11 @@ export default function ExpandedHeader({ category }) {
                         <div className='category-container d-flex flex-column me-3 border-end border-black p-1 mb-1'>
                             {
                                 e.map((e1, i) => (
-                                    <div className={style.hoverUnderline} style={{ cursor: 'pointer' }}>{e1}</div>
+                                    <Link to={e1.link} style={{ textDecoration: 'none', color: 'inherit' }}>
+                                        <div className={style.hoverUnderline} style={{ cursor: 'pointer' }}>
+                                            {e1.categoryItemName}
+                                        </div>
+                                    </Link>
 
                                 ))
                             }

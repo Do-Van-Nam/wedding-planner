@@ -58,31 +58,78 @@ export default function Header() {
   // const [isPopupVisible, setPopupVisible] = useState(false)
   // const hidePopup = () => setPopupVisible(false)
   // const showPopup = () => setPopupVisible(true)
-  const vendors={
-    categoryName:'Nhà Cung Cấp',
-    categoryItems: [['Nhà Cung Cấp Của Bạn','Quản Lý Nhà Cung Cấp','Trò Chuyện Với Nhà Cung Cấp','Đánh Giá Nhà Cung Cấp'],
-    
-    ['Địa Điểm Tổ Chức','Nhiếp Ảnh Gia','Tiệc Cưới','Áo Cưới','Nhà Tổ Chức Đám Cưới','Bánh Cưới','DJ','Quay Phim'],
-    [ "Cho Thuê Đồ Cưới",
-      "Dịch Vụ Trang Điểm",
-      "Hoa Cưới",
-      "Ban Nhạc",
-      "Dịch Vụ Quay Bar",
-      "Rước Dâu", "Thiệp cưới"]]
+  const vendors = {
+    categoryName: 'Nhà Cung Cấp',
+    categoryItems: [
+      [
+        { categoryItemName: 'Nhà Cung Cấp Của Bạn', link: '/your-vendors' },
+        { categoryItemName: 'Quản Lý Nhà Cung Cấp', link: '/manage-vendors' },
+        { categoryItemName: 'Trò Chuyện Với Nhà Cung Cấp', link: '/chat-vendors' },
+        { categoryItemName: 'Đánh Giá Nhà Cung Cấp', link: '/review-vendors' }
+      ],
+      [
+        { categoryItemName: 'Địa Điểm Tổ Chức', link: '/venue' },
+        { categoryItemName: 'Nhiếp Ảnh Gia', link: '/photographer' },
+        { categoryItemName: 'Tiệc Cưới', link: '/catering' },
+        { categoryItemName: 'Áo Cưới', link: '/bridal-gown' },
+        { categoryItemName: 'Nhà Tổ Chức Đám Cưới', link: '/wedding-planner' },
+        { categoryItemName: 'Bánh Cưới', link: '/wedding-cake' },
+        { categoryItemName: 'DJ', link: '/dj' },
+        { categoryItemName: 'Quay Phim', link: '/videographer' }
+      ],
+      [
+        { categoryItemName: 'Cho Thuê Đồ Cưới', link: '/rental-bridal' },
+        { categoryItemName: 'Dịch Vụ Trang Điểm', link: '/makeup-services' },
+        { categoryItemName: 'Hoa Cưới', link: '/flowers' },
+        { categoryItemName: 'Ban Nhạc', link: '/band' },
+        { categoryItemName: 'Dịch Vụ Quay Bar', link: '/bar-service' },
+        { categoryItemName: 'Rước Dâu', link: '/transportation' },
+        { categoryItemName: 'Thiệp cưới', link: '/invitations' }
+      ]
+    ]
   }
+  
   const planningTools={
     categoryName:'Kế hoạch',
-    categoryItems: [['Kế hoạch của bạn','Checklist','Ngân sách'],
+    categoryItems : [
+      [{ categoryItemName: 'Kế hoạch của bạn', link: '/your-plan' },
+      { categoryItemName: 'Checklist', link: '/checklist' },
+      { categoryItemName: 'Ngân sách', link: '/budget' }],
+      [{ categoryItemName: 'Khách mời', link: '/guests' },
+      { categoryItemName: 'Gửi lời tới khách mời', link: '/send-message' }],
+      [{ categoryItemName: 'Online RSVP', link: '/online-rsvp' }]
+    ]
     
-    ['Khách mời','Gửi lời tới khách mời'],
-    [ 'Online RSVP']]
   }
-  const attireAndRings={
-    categoryName:'Trang phục và Nhẫn',
-    categoryItems: [['Váy cưới','Váy chữ A','Váy dạ hội','Váy nàng tiên cá','Váy body','Váy ngắn' ],
-        ['Bộ vest và áo tuxedo','Váy phù dâu'],
-    [ 'Nhẫn cưới',"Nhẫn cắt kiểu công chúa", "Nhẫn cắt kiểu Asscher", "Nhẫn cắt kiểu đệm", "Nhẫn cắt kiểu ngọc lục bảo", "Nhẫn cắt kiểu hình quả lê", "Nhẫn cắt kiểu rực rỡ", "Nhẫn cắt kiểu tròn", "Nhẫn cắt kiểu hình bầu dục"]]
+  const attireAndRings = {
+    categoryName: 'Trang phục và Nhẫn',
+    categoryItems: [
+      [
+        { categoryItemName: 'Váy cưới', link: '/wedding-dress' },
+        { categoryItemName: 'Váy chữ A', link: '/a-line-dress' },
+        { categoryItemName: 'Váy dạ hội', link: '/ball-gown' },
+        { categoryItemName: 'Váy nàng tiên cá', link: '/mermaid-dress' },
+        { categoryItemName: 'Váy body', link: '/bodycon-dress' },
+        { categoryItemName: 'Váy ngắn', link: '/short-dress' }
+      ],
+      [
+        { categoryItemName: 'Bộ vest và áo tuxedo', link: '/suit-and-tuxedo' },
+        { categoryItemName: 'Váy phù dâu', link: '/bridesmaid-dress' }
+      ],
+      [
+        { categoryItemName: 'Nhẫn cưới', link: '/wedding-ring' },
+        { categoryItemName: 'Nhẫn cắt kiểu công chúa', link: '/princess-cut-ring' },
+        { categoryItemName: 'Nhẫn cắt kiểu Asscher', link: '/asscher-cut-ring' },
+        { categoryItemName: 'Nhẫn cắt kiểu đệm', link: '/cushion-cut-ring' },
+        { categoryItemName: 'Nhẫn cắt kiểu ngọc lục bảo', link: '/emerald-cut-ring' },
+        { categoryItemName: 'Nhẫn cắt kiểu hình quả lê', link: '/pear-cut-ring' },
+        { categoryItemName: 'Nhẫn cắt kiểu rực rỡ', link: '/radiant-cut-ring' },
+        { categoryItemName: 'Nhẫn cắt kiểu tròn', link: '/round-cut-ring' },
+        { categoryItemName: 'Nhẫn cắt kiểu hình bầu dục', link: '/oval-cut-ring' }
+      ]
+    ]
   }
+  
   const vendorsRef = useRef(null);
   const handleClickOutside = (event) => {
     if (vendorsRef.current && !vendorsRef.current.contains(event.target)) {
@@ -115,7 +162,8 @@ export default function Header() {
             <h4 className={`me-3 ${style.headeritem}`} onClick={()=>toggleExpanded('planningTools')} >Kế hoạch</h4>
             <h4 className={`me-3 ${style.headeritem}`} onClick={()=>toggleExpanded('vendors')} >Nhà cung cấp</h4>
               <h4 className={`me-3 ${style.headeritem}` } onClick={()=>toggleExpanded('attireAndRings')} >Trang phục, Nhẫn</h4>
-            <h4 className={`me-3 ${style.headeritem}`}>Lập kế hoạch tự động</h4>
+              <h4 className={`me-3 ${style.headeritem}`}>Lập kế hoạch tự động</h4>
+              <h4 className={`me-3 ${style.headeritem}`}>Yêu thích</h4>
           </div>
 
 

@@ -9,6 +9,7 @@ import Problems from './pages/Problems/Problems'
 import Statistics from './pages/Statistics/Statistics'
 import Header from './components/Header/Header';
 import Sidebar from './components/Sidebar/Sidebar';
+import Checklist from './pages/Checklist';
 import api from './api';
 import PrivateRoute from './PrivateRoute';
 
@@ -29,7 +30,7 @@ function App() {
           <Route path='/manager/problems' element={<Problems />} />
           <Route path='/manager/statistics' element={<Statistics />} />
           <Route path='/tenant' element={<Tenant />} />
-          <Route path='/checklist'  />
+          <Route path='/checklist' element={<Checklist/>} />
           <Route path='/budget'  />
           <Route path='/vendor/venue'  />
           <Route path='/vendor/photographer'  />

@@ -151,7 +151,51 @@ export default function Manager() {
                         </a>
                     </div>
                 </div>
+                <div className='attireAndRings shadow p-3 mb-5 bg-body-tertiary rounded p-3'
+                    style={{
+                        width: '43vw',
+                        backgroundColor: 'white',
+                        height: venueExpanded ? 'auto' : '15vh',
+                        maxHeight: venueExpanded ? '100vh' : '15vh',
+                        overflow: 'hidden',
+                        transition: 'max-height 1s ease-in-out',
+                    }}>
+                    <div className='d-flex justify-content-between align-items-center'>
+                        <div onClick={toggleVenueBoxSize}
+                            style={{ cursor: 'pointer', fontSize: '24px', fontWeight: '600', paddingBottom: '10px' }}
+                        >
+                            Trang phục và Nhẫn cưới
+                        </div>
+                        <button type="button" className="btn btn-lg rounded-pill"
+                            style={{ backgroundColor: '#ff44cb', color: 'white', fontWeight: '500', padding: '10px 20px' }}>
+                            Tìm Trang phục và Nhẫn
+                        </button>
+                    </div>
 
+                    <div style={{ fontSize: '16px', color: '#555', marginBottom: '10px' }}>
+                        Tìm Trang phục và Nhẫn cho lễ cưới.
+                    </div>
+
+                    <div className='d-flex justify-content-between align-items-center' style={{ marginBottom: '10px' }}>
+                        <div style={{ fontSize: '14px', fontWeight: '700', color: '#333' }}>Khám phá các Trang phục và Nhẫn</div>
+                        <a href="" style={{ fontSize: '14px', color: '#ff44cb' }}>
+                            Xem tất cả
+                        </a>
+                    </div>
+
+                    <div className='location-info d-flex flex-column align-items-center' style={{ marginBottom: '10px' }}>
+                        <h4 style={{ fontSize: '18px', fontWeight: '500', color: '#333' }}>Wedding Planner</h4>
+                        <h4 style={{ fontSize: '16px', color: '#555' }}>Bạn chưa chọn Trang phục và Nhẫn</h4>
+                        <h4 style={{ fontSize: '16px', color: '#555' }}>Thử nội dung khác</h4>
+                    </div>
+
+                    <div className='d-flex flex-column align-items-center'>
+                        <a href="" style={{ fontSize: '16px', color: '#ff44cb', textAlign: 'center' }}>
+                            Đã có Trang phục và Nhẫn cưới? Thêm thông tin
+                        </a>
+                        
+                    </div>
+                </div>
             </div>
             <div className='right-side d-flex flex-column '
 
@@ -169,7 +213,7 @@ export default function Manager() {
                         <div onClick={toggleVenueBoxSize}
                             style={{ cursor: 'pointer', fontSize: '24px', fontWeight: '600', paddingBottom: '10px' }}
                         >
-                            Nhà cung cấp {venueExpanded ? <i className="bi bi-caret-up"></i> : <i className="bi bi-caret-down"></i>}
+                            Nhà cung cấp 
                         </div>
                         <button type="button" className="btn btn-lg rounded-pill"
                             style={{ backgroundColor: '#ff44cb', color: 'white', fontWeight: '500', padding: '10px 20px' }}>
@@ -210,58 +254,10 @@ export default function Manager() {
                         <a href="" style={{ fontSize: '16px', color: '#ff44cb', textAlign: 'center' }}>
                             Đã thuê nhà cung cấp dịch vụ? Thêm thông tin nhà cung cấp dịch vụ
                         </a>
-                        <a href="" onClick={toggleVenueBoxSize} style={{ fontSize: '16px', color: '#ff44cb', marginTop: '10px' }}>
-                            Ẩn bớt
-                        </a>
+                       
                     </div>
                 </div>
-                <div className='attireAndRings shadow p-3 mb-5 bg-body-tertiary rounded p-3'
-                    style={{
-                        width: '43vw',
-                        backgroundColor: 'white',
-                        height: venueExpanded ? 'auto' : '15vh',
-                        maxHeight: venueExpanded ? '100vh' : '15vh',
-                        overflow: 'hidden',
-                        transition: 'max-height 1s ease-in-out',
-                    }}>
-                    <div className='d-flex justify-content-between align-items-center'>
-                        <div onClick={toggleVenueBoxSize}
-                            style={{ cursor: 'pointer', fontSize: '24px', fontWeight: '600', paddingBottom: '10px' }}
-                        >
-                            Trang phục và Nhẫn cưới{venueExpanded ? <i className="bi bi-caret-up"></i> : <i className="bi bi-caret-down"></i>}
-                        </div>
-                        <button type="button" className="btn btn-lg rounded-pill"
-                            style={{ backgroundColor: '#ff44cb', color: 'white', fontWeight: '500', padding: '10px 20px' }}>
-                            Tìm Trang phục và Nhẫn
-                        </button>
-                    </div>
-
-                    <div style={{ fontSize: '16px', color: '#555', marginBottom: '10px' }}>
-                        Tìm Trang phục và Nhẫn cho lễ cưới.
-                    </div>
-
-                    <div className='d-flex justify-content-between align-items-center' style={{ marginBottom: '10px' }}>
-                        <div style={{ fontSize: '14px', fontWeight: '700', color: '#333' }}>Khám phá các Trang phục và Nhẫn</div>
-                        <a href="" style={{ fontSize: '14px', color: '#ff44cb' }}>
-                            Xem tất cả
-                        </a>
-                    </div>
-
-                    <div className='location-info d-flex flex-column align-items-center' style={{ marginBottom: '10px' }}>
-                        <h4 style={{ fontSize: '18px', fontWeight: '500', color: '#333' }}>Wedding Planner</h4>
-                        <h4 style={{ fontSize: '16px', color: '#555' }}>Bạn chưa chọn Trang phục và Nhẫn</h4>
-                        <h4 style={{ fontSize: '16px', color: '#555' }}>Thử nội dung khác</h4>
-                    </div>
-
-                    <div className='d-flex flex-column align-items-center'>
-                        <a href="" style={{ fontSize: '16px', color: '#ff44cb', textAlign: 'center' }}>
-                            Đã có Trang phục và Nhẫn cưới? Thêm thông tin
-                        </a>
-                        <a href="" onClick={toggleVenueBoxSize} style={{ fontSize: '16px', color: '#ff44cb', marginTop: '10px' }}>
-                            Ẩn bớt
-                        </a>
-                    </div>
-                </div>
+               
 
             </div>
 
