@@ -6,6 +6,7 @@ import { AppContext } from '../../AppContext'
 import api from '../../api'
 import BuildingPopup from '../../components/BuildingPopup'
 import EditWeddingInfo from '../../components/EditWeddingInfo/EditWeddingInfo'
+import AddVendorItem from '../../components/AddVendorItem'
 
 export default function Manager() {
     // const { selectedBuilding, rooms, setRooms } = useContext(AppContext)
@@ -48,11 +49,134 @@ export default function Manager() {
     const [editWeddingInfoVisible, setEditWeddingInfoVisible] = useState(false)
     const toggleVenueBoxSize = () => setVenueExpanded(!venueExpanded)
     const closeEditWeddingInfo = () => setEditWeddingInfoVisible(false)
+    const [addVenueVisible, setAddVenueVisible] = useState(false)
+    const closeAddVenue = () => setAddVenueVisible(false)
+    const [type, setType] = useState('')
+    const [addVendorItemVisible, setAddVendorItemVisible] = useState(false)
+    const closeAddVendorItem = () => setAddVendorItemVisible(false)
+   const [selectVendorPopup,setSelectVendorPopup]= useState(false)
+   const [vendorType,setVendorType]= useState('')
+
+const SelectVendorPopup = ()=>(
+    <div className='position-fixed top-50 start-50 translate-middle shadow bg-body-tertiary rounded
+    d-flex flex-column justify-content-center align-items-center
+    '
+      style={{ height: '80vh', width: '492px', zIndex: '999' }}>
+<button className='btn rounded-circle position-absolute top-0 end-0 d-flex justify-content-center align-items-center me-1 mt-1'
+        style={{ backgroundColor: 'white', zIndex: '999', height: '30px', width: '30px' }}
+        onClick={()=>setSelectVendorPopup(false)}
+        >
+        
+        <i class="bi bi-x-lg"></i>
+      </button>
+      <div class="dropdown" style={{width:'60%'}}>
+  <button class="btn btn-secondary dropdown-toggle" 
+  style={{width:'100%'}}
+  type="button" data-bs-toggle="dropdown" aria-expanded="false">
+    {vendorType}
+  </button>
+  <ul className="dropdown-menu" style={{width:'100%'}}>
+  <li>
+    <a className="dropdown-item" href="#" onClick={() => { setVendorType('Nhiếp Ảnh Gia'); setType('photographer'); }}>
+      Nhiếp Ảnh Gia
+    </a>
+  </li>
+  <li>
+    <a className="dropdown-item" href="#" onClick={() => { setVendorType('Tiệc Cưới'); setType('catering'); }}>
+      Tiệc Cưới
+    </a>
+  </li>
+  <li>
+    <a className="dropdown-item" href="#" onClick={() => { setVendorType('Áo Cưới'); setType('wedding-dress'); }}>
+      Áo Cưới
+    </a>
+  </li>
+  <li>
+    <a className="dropdown-item" href="#" onClick={() => { setVendorType('Nhà Tổ Chức'); setType('organizer'); }}>
+      Nhà Tổ Chức
+    </a>
+  </li>
+  <li>
+    <a className="dropdown-item" href="#" onClick={() => { setVendorType('Bánh Cưới'); setType('cake'); }}>
+      Bánh Cưới
+    </a>
+  </li>
+  <li>
+    <a className="dropdown-item" href="#" onClick={() => { setVendorType('DJ'); setType('dj'); }}>
+      DJ
+    </a>
+  </li>
+  <li>
+    <a className="dropdown-item" href="#" onClick={() => { setVendorType('Quay Phim'); setType('videography'); }}>
+      Quay Phim
+    </a>
+  </li>
+  <li>
+    <a className="dropdown-item" href="#" onClick={() => { setVendorType('Đồ Cưới'); setType('wedding-shop'); }}>
+      Đồ Cưới
+    </a>
+  </li>
+  <li>
+    <a className="dropdown-item" href="#" onClick={() => { setVendorType('Trang Điểm'); setType('makeup'); }}>
+      Trang Điểm
+    </a>
+  </li>
+  <li>
+    <a className="dropdown-item" href="#" onClick={() => { setVendorType('Hoa Cưới'); setType('wedding-flower'); }}>
+      Hoa Cưới
+    </a>
+  </li>
+  <li>
+    <a className="dropdown-item" href="#" onClick={() => { setVendorType('Ban Nhạc'); setType('band'); }}>
+      Ban Nhạc
+    </a>
+  </li>
+  <li>
+    <a className="dropdown-item" href="#" onClick={() => { setVendorType('Quay Bar'); setType('bar'); }}>
+      Quay Bar
+    </a>
+  </li>
+  <li>
+    <a className="dropdown-item" href="#" onClick={() => { setVendorType('Rước Dâu'); setType('transportation'); }}>
+      Rước Dâu
+    </a>
+  </li>
+  <li>
+    <a className="dropdown-item" href="#" onClick={() => { setVendorType('Thiệp Cưới'); setType('invitation'); }}>
+      Thiệp Cưới
+    </a>
+  </li>
+</ul>
+
+</div>
+
+
+      <button type="button" className="btn btn-lg rounded-pill mt-3"
+        style={{
+          backgroundColor: '#ff44cb',
+          color: 'white',
+          fontWeight: '500',
+          fontSize: '16px',
+          padding: '10px 20px',
+          width: '60%'
+        }}
+        onClick={()=>{setAddVendorItemVisible(true);setSelectVendorPopup(false)}}
+        >
+       Thêm
+      </button>
+      </div>
+      )
+
+
     return (
         <div class=' d-flex flex-wrap justify-content-evenly align-items-start'
             style={{ padding: '0', margin: '0', border: '0', backgroundColor: "#f1ece4" }}>
 
+            
             <EditWeddingInfo isVisible={editWeddingInfoVisible} onClose={closeEditWeddingInfo} />
+            {/* <AddVendorItem isVisible={addVenueVisible} onClose={closeAddVenue} type={'venue'}/> */}
+            <AddVendorItem isVisible={addVendorItemVisible} onClose={closeAddVendorItem} type={type}/>
+           {selectVendorPopup&& <SelectVendorPopup/>}
             <div className='wedding-info d-flex flex-column justify-content-between align-items-center'
                 style={{ cursor: 'pointer', backgroundColor: "#f1ece4", width: '90vw', maxWidth: '90vw', marginTop: '15vh' }}
                 onClick={() => setEditWeddingInfoVisible(true)}
@@ -114,10 +238,10 @@ export default function Manager() {
                         transition: 'max-height 1s ease-in-out',
                     }}>
                     <div className='d-flex justify-content-between align-items-center'>
-                        <div onClick={toggleVenueBoxSize}
+                        <div 
                             style={{ cursor: 'pointer', fontSize: '24px', fontWeight: '600', paddingBottom: '10px' }}
                         >
-                            Địa điểm {venueExpanded ? <i className="bi bi-caret-up"></i> : <i className="bi bi-caret-down"></i>}
+                            Địa điểm 
                         </div>
                         <button type="button" className="btn btn-lg rounded-pill"
                             style={{ boxSizing: 'border-box', backgroundColor: '#ff44cb', color: 'white', fontWeight: '500', padding: '10px 20px' }}>
@@ -143,12 +267,14 @@ export default function Manager() {
                     </div>
 
                     <div className='d-flex flex-column align-items-center'>
-                        <a href="" style={{ fontSize: '16px', color: '#ff44cb', textAlign: 'center' }}>
+                        <a href="javascript:void(0);" style={{ fontSize: '16px', color: '#ff44cb', textAlign: 'center' }} 
+                        // onClick={()=>setAddVenueVisible(true)}
+                        onClick={()=>{setType('venue');setAddVendorItemVisible(true)}}
+                        
+                        >
                             Đã thuê địa điểm? Thêm thông tin địa điểm tổ chức
                         </a>
-                        <a href="" onClick={toggleVenueBoxSize} style={{ fontSize: '16px', color: '#ff44cb', marginTop: '10px' }}>
-                            Ẩn bớt
-                        </a>
+                        
                     </div>
                 </div>
                 <div className='attireAndRings shadow p-3 mb-5 bg-body-tertiary rounded p-3'
@@ -161,7 +287,7 @@ export default function Manager() {
                         transition: 'max-height 1s ease-in-out',
                     }}>
                     <div className='d-flex justify-content-between align-items-center'>
-                        <div onClick={toggleVenueBoxSize}
+                        <div 
                             style={{ cursor: 'pointer', fontSize: '24px', fontWeight: '600', paddingBottom: '10px' }}
                         >
                             Trang phục và Nhẫn cưới
@@ -178,7 +304,7 @@ export default function Manager() {
 
                     <div className='d-flex justify-content-between align-items-center' style={{ marginBottom: '10px' }}>
                         <div style={{ fontSize: '14px', fontWeight: '700', color: '#333' }}>Khám phá các Trang phục và Nhẫn</div>
-                        <a href="" style={{ fontSize: '14px', color: '#ff44cb' }}>
+                        <a href="javascript:void(0);" style={{ fontSize: '14px', color: '#ff44cb' }}>
                             Xem tất cả
                         </a>
                     </div>
@@ -190,11 +316,14 @@ export default function Manager() {
                     </div>
 
                     <div className='d-flex flex-column align-items-center'>
-                        <a href="" style={{ fontSize: '16px', color: '#ff44cb', textAlign: 'center' }}>
-                            Đã có Trang phục và Nhẫn cưới? Thêm thông tin
-                        </a>
+                        <div  style={{ fontSize: '16px', color: '#ff44cb', textAlign: 'center' }}>
+                            Đã có Trang phục và Nhẫn cưới? 
+                            <span style={{cursor:'pointer', textDecoration:'underline',marginRight:'8px'}} onClick={()=>{setType('attire');setAddVendorItemVisible(true)}}> Thêm Trang phục</span> 
+                            <span style={{cursor:'pointer', textDecoration:'underline',}} onClick={()=>{setType('rings');setAddVendorItemVisible(true)}}> Thêm Nhẫn</span> 
+                        </div>
                         
                     </div>
+                    
                 </div>
             </div>
             <div className='right-side d-flex flex-column '
@@ -210,7 +339,7 @@ export default function Manager() {
                         transition: 'max-height 1s ease-in-out',
                     }}>
                     <div className='d-flex justify-content-between align-items-center'>
-                        <div onClick={toggleVenueBoxSize}
+                        <div 
                             style={{ cursor: 'pointer', fontSize: '24px', fontWeight: '600', paddingBottom: '10px' }}
                         >
                             Nhà cung cấp 
@@ -227,7 +356,7 @@ export default function Manager() {
 
                     <div className='d-flex justify-content-between align-items-center' style={{ marginBottom: '10px' }}>
                         <div style={{ fontSize: '14px', fontWeight: '700', color: '#333' }}>Khám phá các Nhà cung cấp</div>
-                        <a href="" style={{ fontSize: '14px', color: '#ff44cb' }}>
+                        <a href="javascript:void(0);" style={{ fontSize: '14px', color: '#ff44cb' }}>
                             Xem tất cả
                         </a>
                     </div>
@@ -251,7 +380,9 @@ export default function Manager() {
                     </div>
 
                     <div className='d-flex flex-column align-items-center'>
-                        <a href="" style={{ fontSize: '16px', color: '#ff44cb', textAlign: 'center' }}>
+                        <a href="javascript:void(0);" style={{ fontSize: '16px', color: '#ff44cb', textAlign: 'center' }}
+                        onClick={()=>setSelectVendorPopup(true)}
+                        >
                             Đã thuê nhà cung cấp dịch vụ? Thêm thông tin nhà cung cấp dịch vụ
                         </a>
                        

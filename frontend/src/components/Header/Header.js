@@ -92,7 +92,7 @@ export default function Header() {
   const planningTools={
     categoryName:'Kế hoạch',
     categoryItems : [
-      [{ categoryItemName: 'Kế hoạch của bạn', link: '/your-plan' },
+      [{ categoryItemName: 'Kế hoạch của bạn', link: '/home' },
       { categoryItemName: 'Checklist', link: '/checklist' },
       { categoryItemName: 'Ngân sách', link: '/budget' }],
       [{ categoryItemName: 'Khách mời', link: '/guests' },
