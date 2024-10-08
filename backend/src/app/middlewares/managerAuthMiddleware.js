@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken')
 const cookieParser = require('cookie-parser')
 
-const managerAuthMiddleWare = (req, res, next) => {
+const managerAuthMiddleware = (req, res, next) => {
     // const authHeader = req.header('Authorization')
 
     // if (!authHeader) return res.status(401).json({ message: 'No token, authorization denied' })
@@ -26,4 +26,4 @@ const managerAuthMiddleWare = (req, res, next) => {
     }
 }
 
-module.exports = managerAuthMiddleWare
+module.exports = managerAuthMiddleware

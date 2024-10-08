@@ -5,6 +5,12 @@ const BuildingRouter = require('./building')
 const RoomRouter = require('./room')
 const LogoutRouter = require('./logout')
 const PlanRouter = require('./plan')
+const FavouriteRouter = require('./favourite')
+const VendorItemRouter = require('./vendoritem')
+const ReviewRouter = require('./review')
+const ChatRoomRouter = require('./chatroom')
+const MessageRouter = require('./message')
+const GuestRouter = require('./guest')
 
 function route(app){
     app.use('/signup',SignupRouter)
@@ -13,6 +19,12 @@ function route(app){
     app.use('/building',BuildingRouter)
     app.use('/room',RoomRouter)
     app.use('/logout',LogoutRouter)
+    app.use('/favourite',FavouriteRouter)
+    app.use('/vendoritem',VendorItemRouter)
+    app.use('/review',ReviewRouter)
+    app.use('/chatroom',ChatRoomRouter)
+    app.use('/message',MessageRouter)
+    app.use('/guest',GuestRouter)
     app.use('/plan',PlanRouter)
 }
 
