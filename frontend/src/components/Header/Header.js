@@ -9,20 +9,20 @@ import ExpandedHeader from './ExpandedHeader';
 import style from './Header.module.css'
 
 export default function Header() {
-  // const navigate = useNavigate()
+  const navigate = useNavigate()
 
-  // const { acc, setAcc, buildings, setBuildings, selectedBuilding, setSelectedBuilding } = useContext(AppContext);
-  // const logOut = async () => {
-  //   try {
-  //     await api.post('/logout')
-  //     localStorage.clear()
-  //     setAcc({})
-  //     navigate('/')
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
+  const { acc, setAcc, buildings, setBuildings, selectedBuilding, setSelectedBuilding } = useContext(AppContext);
+  const logOut = async () => {
+    try {
+      await api.post('/logout')
+      localStorage.clear()
+      setAcc({})
+      navigate('/')
+    } catch (error) {
+      console.log(error)
+    }
 
-  // }
+  }
 
   // useEffect(() => {
   //   console.log(acc)
@@ -38,22 +38,22 @@ export default function Header() {
   //   }
   // }, [acc?._id])
 
-  // useEffect(() => {
-  //   try {
-  //     api.get('/acc/check-auth')
-  //       .then(response =>
-  //         setAcc(response.data.user)
-  //       )
-  //       .catch(error => {
-  //         // navigate('/')
-  //         console.log(error)
-  //       }
-  //       )
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  //   console.log(acc)
-  // }, [])
+  useEffect(() => {
+    try {
+      api.get('/acc/check-auth')
+        .then(response =>
+          setAcc(response.data.user)
+        )
+        .catch(error => {
+          // navigate('/')
+          console.log(error)
+        }
+        )
+    } catch (error) {
+      console.log(error)
+    }
+    console.log(acc)
+  }, [])
 
   // const [isPopupVisible, setPopupVisible] = useState(false)
   // const hidePopup = () => setPopupVisible(false)
@@ -168,9 +168,13 @@ export default function Header() {
 
 
         </div>
-        <div className='d-flex'>
-          <i class="bi bi-chat"></i>
-          <div>Account</div>
+        <div className='d-flex align-items-center'>
+          <i class="bi bi-chat me-3" style={{fontSize:'20px'}}></i>
+          <div className='d-flex flex-column'>
+          <div className='' style={{fontSize:'25px'}}>Account</div>
+          <div className='' style={{cursor:'pointer'}} onClick={logOut}>Đăng xuất</div>
+
+          </div>
 
         </div>
       </nav>

@@ -15,7 +15,11 @@ const SignupController = async (req, res) => {
         // ma hoa mat khau 
         const salt = await bcrypt.genSalt(10)
         const hashedPassword = await bcrypt.hash(password, salt)
-
+let acc1 = {
+    phone: phone,
+    password: hashedPassword,
+    role: role
+}
         acc = new Account({
             phone: phone,
             password: hashedPassword,
@@ -30,7 +34,7 @@ const SignupController = async (req, res) => {
 
         jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '4h' }, (err, token) => {
             if (err) return res.status(500).json({ message: 'Token generation failed' })
-            res.json({ token: token, role: acc.role })
+            res.json({user:acc1, token: token, role: acc.role })
         })
 
     } catch (error) {
