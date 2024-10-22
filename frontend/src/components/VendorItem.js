@@ -50,10 +50,10 @@ export default function VendorItem({ props }) {
   </div>
 
   <div className='d-flex justify-content-between p-1'>
-    <p style={{ fontSize: '14px', margin: '0' }}>{props.subinfo}</p>
+    <p style={{ fontSize: '14px', margin: '0' }}>{props.subInfo}</p>
     <p style={{ fontSize: '14px', margin: '0' }}>
       <i className="bi bi-star-fill" style={{ color: '#fbaf00' }}> </i>
-      {props.rating} ({props.noReviews})
+      {props.rate} ({props.noReview})
     </p>
   </div>
 

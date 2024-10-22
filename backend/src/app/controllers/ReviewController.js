@@ -1,4 +1,5 @@
 const Review = require('../models/Review');
+const VendorItem = require('../models/VendorItem');
 
 // Lấy danh sách Reviews theo accId
 const getReviewsByAccId = async (req, res) => {
@@ -42,6 +43,7 @@ const createReview = async (req, res) => {
         const newReview = new Review({ vendorItemId, accId, review, rate });
 
         await newReview.save();
+        updateItemReviewStats(vendorItemId)
         res.status(201).json({ review: newReview });
     } catch (error) {
         console.error('Error creating vendor item:', error);
@@ -67,7 +69,7 @@ const updateReview = async (req, res) => {
         if (!updatedReview) {
             return res.status(404).json({ message: 'Review not found' });
         }
-
+        updateItemReviewStats(vendorItemId)
         res.json({ updatedReview });
     } catch (error) {
         console.error('Error updating vendor item:', error);
@@ -84,14 +86,30 @@ const deleteReview = async (req, res) => {
         if (!deletedReview) {
             return res.status(404).json({ message: 'Review not found' });
         }
-
+        updateItemReviewStats(deletedReview.vendorItemId)
         res.json({ message: 'Review successfully deleted', deletedReview });
     } catch (error) {
         console.error('Error deleting vendor item:', error);
         return res.status(500).json({ message: 'Server error' });
     }
 };
-
+const updateItemReviewStats = async (vendorItemId)=>{
+    const stats = await Review.aggregate([
+        {$match: {vendorItemId}},
+        {
+            $group:{
+                _id:"$vendorItemId",
+                avgRating: {$avg: 'rate'},
+                noReview: {$sum: 1}
+            }
+        }
+    ])
+    const {avgRating=0,noReview=0} = stats[0] || {}
+    await VendorItem.findByIdAndUpdate(vendorItemId,{
+        rating:avgRating,
+        noReview
+    })
+}
 module.exports = {
     getReviewsByAccId,
     getReviewById,

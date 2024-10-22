@@ -1,24 +1,38 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios'
+import { useLocation } from 'react-router-dom'
+import api from '../api'
+
 import Sidebar from '../components/Sidebar/Sidebar'
 import Header from '../components/Header/Header'
 import VendorItem from '../components/VendorItem'
 import RequestQuoteForm from '../components/RequestQuoteForm/RequestQuoteForm'
-export default function Tenant({ props1 }) {
-    const props = {
-        subinfo:'Ha noi, vietnam',
-        rating:4.8,
-        noReviews:128,
-        name: 'do khoi',
-        description:'fkdsalfjkdsflksdfsdffjdsalfkdjfldskfjsdklfjdslffkdsalfjkdsflksdfsdffjdsalfkdjfldskfjsdklfjdslf;fkdsalfjkdsflksdfsdffjdsalfkdjfldskfjsdklfjdslfkfkdsalfjkdsflksdfsdffjdsalfkdjfldskfjsdklfjdslfsdjffkdsjalfkdsjflksdfjsal;fksdjf',
-        noGuests:'123-2132',
-        price:1234
-    }
-    const ar=[1,2,3,4,5,6,7]
+export default function Marketplace({ props1 }) {    
+
+    const location = useLocation()
+    const type = location.pathname.split('/').pop()
+    const [items,setItems] = useState([])
+    
+
+    useEffect(()=>{
+      try {
+        api.get(`/vendorItem/${type}`)
+            .then(response =>
+              setItems(response.data.vendoritem)
+            )
+            .catch(error=>
+              console.log(error)
+            )
+      } catch (error) {
+        console.log(error)
+      }
+    },[])
+
+    console.log(type)
     return (
         <div className='d-flex flex-wrap' style={{ padding: '8vw' }}>
         <div className='d-flex justify-content-between' style={{ width: '100%' }}>
-          <h3>161 Wedding Venues in Grand Rapids, MI</h3>
+          <h3>{items.length} Wedding Venues tại Hà Nội</h3>
           <div className='d-flex' >
             <div className="dropdown" style={{ height: '100%' }}>
               <a
@@ -77,9 +91,9 @@ export default function Tenant({ props1 }) {
         style={{color:'black'}}
         >Khoảng cách</button>
       </div>
-              {ar.map((e,i)=>   (
+              {items.map((e,i)=>   (
 
-                <VendorItem key={i} props={props}/>
+                <VendorItem key={i} props={e}/>
               ))}
       
       </div>

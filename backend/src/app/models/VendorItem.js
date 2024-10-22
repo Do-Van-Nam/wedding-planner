@@ -9,6 +9,8 @@ const VendorItem = new Schema({
     subInfo : { type : String, },
     priceFrom : {type: Number},
     priceTo : {type: Number},
+    rate : {type: Number,default:0},
+    noReview : {type: Number,default:0},
     
 })
 

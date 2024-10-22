@@ -41,11 +41,12 @@ export default function Header() {
   useEffect(() => {
     try {
       api.get('/acc/check-auth')
-        .then(response =>
-          setAcc(response.data.user)
+        .then(response =>{
+          console.log(response.data.user)
+          setAcc(response.data.user)}
         )
         .catch(error => {
-          // navigate('/')
+          navigate('/')
           console.log(error)
         }
         )
@@ -68,23 +69,23 @@ export default function Header() {
         { categoryItemName: 'Đánh Giá Nhà Cung Cấp', link: '/review-vendors' }
       ],
       [
-        { categoryItemName: 'Địa Điểm Tổ Chức', link: '/venue' },
-        { categoryItemName: 'Nhiếp Ảnh Gia', link: '/photographer' },
-        { categoryItemName: 'Tiệc Cưới', link: '/catering' },
-        { categoryItemName: 'Áo Cưới', link: '/bridal-gown' },
-        { categoryItemName: 'Nhà Tổ Chức Đám Cưới', link: '/wedding-planner' },
-        { categoryItemName: 'Bánh Cưới', link: '/wedding-cake' },
-        { categoryItemName: 'DJ', link: '/dj' },
-        { categoryItemName: 'Quay Phim', link: '/videographer' }
+        { categoryItemName: 'Địa Điểm Tổ Chức', link: '/marketplace/venue' },
+        { categoryItemName: 'Nhiếp Ảnh Gia', link: '/marketplace/photographer' },
+        { categoryItemName: 'Tiệc Cưới', link: '/marketplace/catering' },
+        { categoryItemName: 'Áo Cưới', link: '/marketplace/bridal-gown' },
+        { categoryItemName: 'Nhà Tổ Chức Đám Cưới', link: '/marketplace/wedding-planner' },
+        { categoryItemName: 'Bánh Cưới', link: '/marketplace/wedding-cake' },
+        { categoryItemName: 'DJ', link: '/marketplace/dj' },
+        { categoryItemName: 'Quay Phim', link: '/marketplace/videographer' }
       ],
       [
-        { categoryItemName: 'Cho Thuê Đồ Cưới', link: '/rental-bridal' },
-        { categoryItemName: 'Dịch Vụ Trang Điểm', link: '/makeup-services' },
-        { categoryItemName: 'Hoa Cưới', link: '/flowers' },
-        { categoryItemName: 'Ban Nhạc', link: '/band' },
-        { categoryItemName: 'Dịch Vụ Quay Bar', link: '/bar-service' },
-        { categoryItemName: 'Rước Dâu', link: '/transportation' },
-        { categoryItemName: 'Thiệp cưới', link: '/invitations' }
+        { categoryItemName: 'Cho Thuê Đồ Cưới', link: '/marketplace/rental-bridal' },
+        { categoryItemName: 'Dịch Vụ Trang Điểm', link: '/marketplace/makeup-services' },
+        { categoryItemName: 'Hoa Cưới', link: '/marketplace/flowers' },
+        { categoryItemName: 'Ban Nhạc', link: '/marketplace/band' },
+        { categoryItemName: 'Dịch Vụ Quay Bar', link: '/marketplace/bar-service' },
+        { categoryItemName: 'Rước Dâu', link: '/marketplace/transportation' },
+        { categoryItemName: 'Thiệp cưới', link: '/marketplace/invitations' }
       ]
     ]
   }
@@ -105,27 +106,27 @@ export default function Header() {
     categoryName: 'Trang phục và Nhẫn',
     categoryItems: [
       [
-        { categoryItemName: 'Váy cưới', link: '/wedding-dress' },
-        { categoryItemName: 'Váy chữ A', link: '/a-line-dress' },
-        { categoryItemName: 'Váy dạ hội', link: '/ball-gown' },
-        { categoryItemName: 'Váy nàng tiên cá', link: '/mermaid-dress' },
-        { categoryItemName: 'Váy body', link: '/bodycon-dress' },
-        { categoryItemName: 'Váy ngắn', link: '/short-dress' }
+        { categoryItemName: 'Váy cưới', link: '/marketplace/wedding-dress' },
+        { categoryItemName: 'Váy chữ A', link: '/marketplace/a-line-dress' },
+        { categoryItemName: 'Váy dạ hội', link: '/marketplace/ball-gown' },
+        { categoryItemName: 'Váy nàng tiên cá', link: '/marketplace/mermaid-dress' },
+        { categoryItemName: 'Váy body', link: '/marketplace/bodycon-dress' },
+        { categoryItemName: 'Váy ngắn', link: '/marketplace/short-dress' }
       ],
       [
-        { categoryItemName: 'Bộ vest và áo tuxedo', link: '/suit-and-tuxedo' },
-        { categoryItemName: 'Váy phù dâu', link: '/bridesmaid-dress' }
+        { categoryItemName: 'Bộ vest và áo tuxedo', link: '/marketplace/suit-and-tuxedo' },
+        { categoryItemName: 'Váy phù dâu', link: '/marketplace/bridesmaid-dress' }
       ],
       [
-        { categoryItemName: 'Nhẫn cưới', link: '/wedding-ring' },
-        { categoryItemName: 'Nhẫn cắt kiểu công chúa', link: '/princess-cut-ring' },
-        { categoryItemName: 'Nhẫn cắt kiểu Asscher', link: '/asscher-cut-ring' },
-        { categoryItemName: 'Nhẫn cắt kiểu đệm', link: '/cushion-cut-ring' },
-        { categoryItemName: 'Nhẫn cắt kiểu ngọc lục bảo', link: '/emerald-cut-ring' },
-        { categoryItemName: 'Nhẫn cắt kiểu hình quả lê', link: '/pear-cut-ring' },
-        { categoryItemName: 'Nhẫn cắt kiểu rực rỡ', link: '/radiant-cut-ring' },
-        { categoryItemName: 'Nhẫn cắt kiểu tròn', link: '/round-cut-ring' },
-        { categoryItemName: 'Nhẫn cắt kiểu hình bầu dục', link: '/oval-cut-ring' }
+        { categoryItemName: 'Nhẫn cưới', link: '/marketplace/wedding-ring' },
+        { categoryItemName: 'Nhẫn cắt kiểu công chúa', link: '/marketplace/princess-cut-ring' },
+        { categoryItemName: 'Nhẫn cắt kiểu Asscher', link: '/marketplace/asscher-cut-ring' },
+        { categoryItemName: 'Nhẫn cắt kiểu đệm', link: '/marketplace/cushion-cut-ring' },
+        { categoryItemName: 'Nhẫn cắt kiểu ngọc lục bảo', link: '/marketplace/emerald-cut-ring' },
+        { categoryItemName: 'Nhẫn cắt kiểu hình quả lê', link: '/marketplace/pear-cut-ring' },
+        { categoryItemName: 'Nhẫn cắt kiểu rực rỡ', link: '/marketplace/radiant-cut-ring' },
+        { categoryItemName: 'Nhẫn cắt kiểu tròn', link: '/marketplace/round-cut-ring' },
+        { categoryItemName: 'Nhẫn cắt kiểu hình bầu dục', link: '/marketplace/oval-cut-ring' }
       ]
     ]
   }

@@ -1,4 +1,5 @@
 const VendorItem = require('../models/VendorItem');
+const Review = require('../models/Review');
 
 // Lấy danh sách VendorItems theo accId
 const getVendorItemsByAccId = async (req, res) => {
@@ -14,6 +15,21 @@ const getVendorItemsByAccId = async (req, res) => {
         return res.status(500).json({ message: 'Server error' });
     }
 };
+
+// Lấy thông tin VendorItem theo type
+const getVendorItemByType = async (req,res)=>{
+    const {type} = req.params
+    try {
+        const items  = await VendorItem.find({type:type})
+        if (items.length===0) {
+            return res.status(404).json({ message: 'VendorItem not found' });
+        }
+        res.json({ vendoritem:items })
+    } catch (error) {
+        console.error('Error fetching vendor item by id:', error);
+        return res.status(500).json({ message: 'Server error' });
+    }
+}
 
 // Lấy thông tin VendorItem theo id
 const getVendorItemById = async (req, res) => {
@@ -48,6 +64,20 @@ const createVendorItem = async (req, res) => {
         return res.status(500).json({ message: 'Server error' });
     }
 };
+
+const createManyVendorItems = async (req, res) => {
+    const vendorItems = req.body;
+    try {
+        const result = await VendorItem.insertMany(vendorItems);
+        res.status(201).json({ message: 'Vendor items added successfully', data: result });
+    
+        
+    } catch (error) {
+        console.error('Error creating vendor item:', error);
+        return res.status(500).json({ message: 'Server error' });
+    }
+};
+
 
 // Cập nhật thông tin VendorItem theo id
 const updateVendorItem = async (req, res) => {
@@ -91,7 +121,9 @@ const deleteVendorItem = async (req, res) => {
 module.exports = {
     getVendorItemsByAccId,
     getVendorItemById,
+    getVendorItemByType,
     createVendorItem,
     updateVendorItem,
-    deleteVendorItem
+    deleteVendorItem,
+    createManyVendorItems
 };

@@ -3,7 +3,7 @@ import { useState, useEffect, useContext } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom'
 import LoginRegister from './pages/LoginRegister'
 import Home from './pages/Home/Home'
-import Tenant from './pages/Tenant'
+import Marketplace from './pages/Marketplace'
 import Rooms from './pages/Rooms/Rooms'
 import Problems from './pages/Problems/Problems'
 import Statistics from './pages/Statistics/Statistics'
@@ -29,15 +29,10 @@ function App() {
           <Route path='/manager/rooms' element={<Rooms />} />
           <Route path='/manager/problems' element={<Problems />} />
           <Route path='/manager/statistics' element={<Statistics />} />
-          <Route path='/tenant' element={<Tenant />} />
+          <Route path='/marketplace/*' element={<Marketplace />} />
           <Route path='/checklist' element={<Checklist/>} />
           <Route path='/budget'  />
-          <Route path='/vendor/venue'  />
-          <Route path='/vendor/photographer'  />
-          <Route path='/vendor/'  />
-          <Route path='/vendor/venue'  />
-          <Route path='/vendor/venue'  />
-          <Route path='/vendor/venue'  />
+    
 
       </Routes>
     </AppProvider>
