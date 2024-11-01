@@ -18,7 +18,8 @@ const LoginController = async (req, res) => {
             const payload = {
                 _id: acc._id,
                 phone: acc.phone,
-                role: acc.role
+                role: acc.role,
+                name:acc.name
             }
             const token = jwt.sign(payload, process.env.JWT_SECRET
                 // (err, token) => {

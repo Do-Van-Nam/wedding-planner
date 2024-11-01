@@ -28,14 +28,14 @@ const getPlanById = async (req, res) => {
 
 // Tạo mới Plan
 const createPlan = async (req, res) => {
-    const { accId,budget,paid,date,partner,vendors } = req.body;
+    const { accId,budget,paid,date,partner,vendors,location } = req.body;
     try {
         const existingPlan = await Plan.findOne({  accId });
         if (existingPlan) {
             return res.status(400).json({ message: 'Plan already exists!' });
         }
 
-        const newPlan = new Plan({accId,budget,paid,date,partner,vendors});
+        const newPlan = new Plan({accId,budget,paid,date,partner,vendors,location});
 
         await newPlan.save();
         res.status(201).json({ plan: newPlan });
@@ -48,11 +48,11 @@ const createPlan = async (req, res) => {
 // Cập nhật thông tin Plan theo id
 const updatePlan = async (req, res) => {
     const { id } = req.params;
-    const {accId,budget,paid,date,partner,vendors} = req.body;
+    const {accId,budget,paid,date,partner,vendors,location} = req.body;
     try {
         const updatedPlan = await Plan.findByIdAndUpdate(
             id,
-            {accId,budget,paid,date,partner,vendors},
+            {accId,budget,paid,date,partner,vendors,location},
             { new: true }
         );
 

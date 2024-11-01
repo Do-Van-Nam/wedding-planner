@@ -38,7 +38,7 @@ export default function Home() {
     try {
       const response = await axios.post('http://localhost:5713/signup', {
         phone: phone,
-        password: password, role:"user"
+        password: password, role:"user",name:""
       },{withCredentials:true})
       const { user } = response.data
 console.log(user)
@@ -46,6 +46,7 @@ console.log(user)
       localStorage.setItem('role', user.role)
       localStorage.setItem('phone', phone)
       setAcc(user)
+
     } catch (error) {
       console.log(error)
       setSignupfailed(true)

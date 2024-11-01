@@ -6,6 +6,7 @@ const Plan=new Schema({
     budget:{type:Number},
     paid:{type:Number},
     date:{type:Date},
+    location:{type:String},
     partner:{type:String},
     vendors:[
         {type:String}

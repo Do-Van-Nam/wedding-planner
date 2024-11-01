@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState ,useRef} from 'react';
+import React, { useContext, useEffect, useState, useRef } from 'react';
 import { AppContext } from '../../AppContext';
 import axios from 'axios'
 import api from '../../api'
@@ -41,9 +41,10 @@ export default function Header() {
   useEffect(() => {
     try {
       api.get('/acc/check-auth')
-        .then(response =>{
+        .then(response => {
           console.log(response.data.user)
-          setAcc(response.data.user)}
+          setAcc(response.data.user)
+        }
         )
         .catch(error => {
           navigate('/')
@@ -89,10 +90,10 @@ export default function Header() {
       ]
     ]
   }
-  
-  const planningTools={
-    categoryName:'Kế hoạch',
-    categoryItems : [
+
+  const planningTools = {
+    categoryName: 'Kế hoạch',
+    categoryItems: [
       [{ categoryItemName: 'Kế hoạch của bạn', link: '/home' },
       { categoryItemName: 'Checklist', link: '/checklist' },
       { categoryItemName: 'Ngân sách', link: '/budget' }],
@@ -100,7 +101,7 @@ export default function Header() {
       { categoryItemName: 'Gửi lời tới khách mời', link: '/send-message' }],
       [{ categoryItemName: 'Online RSVP', link: '/online-rsvp' }]
     ]
-    
+
   }
   const attireAndRings = {
     categoryName: 'Trang phục và Nhẫn',
@@ -130,7 +131,7 @@ export default function Header() {
       ]
     ]
   }
-  
+
   const vendorsRef = useRef(null);
   const handleClickOutside = (event) => {
     if (vendorsRef.current && !vendorsRef.current.contains(event.target)) {
@@ -144,7 +145,7 @@ export default function Header() {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
-  
+
   const toggleExpanded = (category) => {
     setExpandedCategory(prevCategory => (prevCategory === category ? null : category));
   };
@@ -154,32 +155,36 @@ export default function Header() {
     shadow p-2  bg-body-tertiary rounded d-flex flex-row
     justify-content-around
     " style={{ width: '100vw', zIndex: '999', height: '10vh' }}>
+        <div className='d-flex align-items-center' style={{ height: '100%' }}>
 
-        <div className='d-flex flex-column' >
-          <div>
-            Wedding Planner
-          </div>
-          <div className='d-flex' >
-            <h4 className={`me-3 ${style.headeritem}`} onClick={()=>toggleExpanded('planningTools')} >Kế hoạch</h4>
-            <h4 className={`me-3 ${style.headeritem}`} onClick={()=>toggleExpanded('vendors')} >Nhà cung cấp</h4>
-              <h4 className={`me-3 ${style.headeritem}` } onClick={()=>toggleExpanded('attireAndRings')} >Trang phục, Nhẫn</h4>
+          <img src='images/flower.png' class="img-thumbnail me-2" alt="..." style={{ height: '50px', width: 'auto' }}></img>
+          <div className='d-flex flex-column' >
+            <div>
+              Wedding Planner
+            </div>
+            <div className='d-flex' >
+              <h4 className={`me-3 ${style.headeritem}`} onClick={() => toggleExpanded('planningTools')} >Kế hoạch</h4>
+              <h4 className={`me-3 ${style.headeritem}`} onClick={() => toggleExpanded('vendors')} >Nhà cung cấp</h4>
+              <h4 className={`me-3 ${style.headeritem}`} onClick={() => toggleExpanded('attireAndRings')} >Trang phục, Nhẫn</h4>
               <h4 className={`me-3 ${style.headeritem}`}>Lập kế hoạch tự động</h4>
               <h4 className={`me-3 ${style.headeritem}`}>Yêu thích</h4>
+            </div>
+
+
           </div>
-
-
         </div>
+
         <div className='d-flex align-items-center'>
-          <i class="bi bi-chat me-3" style={{fontSize:'20px'}}></i>
+          <i class="bi bi-chat me-3" style={{ fontSize: '20px' }}></i>
           <div className='d-flex flex-column'>
-          <div className='' style={{fontSize:'25px'}}>Account</div>
-          <div className='' style={{cursor:'pointer'}} onClick={logOut}>Đăng xuất</div>
+            <div className='' style={{ fontSize: '25px' }}>Account</div>
+            <div className='' style={{ cursor: 'pointer' }} onClick={logOut}>Đăng xuất</div>
 
           </div>
 
         </div>
       </nav>
-    
+
       {expandedCategory === 'vendors' && (
         <div ref={vendorsRef}>
           <ExpandedHeader category={vendors} />
@@ -190,7 +195,7 @@ export default function Header() {
           <ExpandedHeader category={planningTools} />
         </div>
       )}
- {expandedCategory === 'attireAndRings' && (
+      {expandedCategory === 'attireAndRings' && (
         <div ref={vendorsRef}>
           <ExpandedHeader category={attireAndRings} />
         </div>

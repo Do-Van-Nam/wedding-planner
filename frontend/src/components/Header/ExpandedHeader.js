@@ -29,7 +29,7 @@ export default function ExpandedHeader({ category }) {
                 {
                     categoryItems.map((e, i) => (
 
-                        <div className='category-container d-flex flex-column me-3 border-end border-black p-1 mb-1'>
+                        <div className='category-container d-flex flex-column me-2 border-end border-black p-2 mb-1'>
                             {
                                 e.map((e1, i) => (
                                     <Link to={e1.link} style={{ textDecoration: 'none', color: 'inherit' }}>
