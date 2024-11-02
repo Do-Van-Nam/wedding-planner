@@ -3,7 +3,7 @@ import React, { createContext,useState} from "react";
 export const AppContext = createContext()
 
 const AppProvider = ({children})=>{
-    const [acc,setAcc] = useState(null)
+    const [acc,setAcc] = useState({})
     const [buildings,setBuildings] = useState([])
     const [floor,setFloor] = useState([])
     const [rooms,setRooms] = useState([])

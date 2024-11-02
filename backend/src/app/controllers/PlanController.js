@@ -84,10 +84,62 @@ const deletePlan = async (req, res) => {
     }
 };
 
+const toggleVendorInPlan = async (req, res) => {
+    const { accId } = req.params;
+    const { vendorId, vendorType } = req.body;
+
+    try {
+        let plan = await Plan.findOne({ accId: accId });
+
+        if (!plan) {
+            plan = new Plan({ accId: accId, vendors: [] });
+            await plan.save();
+        }
+
+        const existingVendorIndex = plan.vendors.findIndex(vendor => vendor.vendorType === vendorType);
+
+        if (existingVendorIndex !== -1) {
+            if (plan.vendors[existingVendorIndex].vendorId !== vendorId) {
+                plan.vendors[existingVendorIndex].vendorId = vendorId; 
+                await plan.save();
+                return res.status(200).json({ message: "Vendor updated in your plan", plan });
+            } else {
+                plan.vendors.splice(existingVendorIndex, 1);
+                await plan.save();
+                return res.status(200).json({ message: "Vendor removed from your plan", plan });
+            }
+        } else {
+            plan.vendors.push({ vendorId, vendorType });
+            await plan.save();
+            return res.status(200).json({ message: "Vendor added to your plan", plan });
+        }
+
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: 'Server error' });
+    }
+}
+
+const checkVendorInPlan = async (req,res)=>{
+    const {accId} = req.params
+    const {vendorId}  =req.body
+try {
+    let plan = await Plan.findOne({accId})
+    if(plan.vendors.includes(vendorId)){
+        return res.status(200).json({exists:true})
+    }
+    else  return res.status(200).json({exists:false})
+} catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: 'Server error' });
+}
+}
 module.exports = {
     getPlanByAccId,
     getPlanById,
     createPlan,
     updatePlan,
-    deletePlan
+    deletePlan,
+    checkVendorInPlan,
+    toggleVendorInPlan
 };

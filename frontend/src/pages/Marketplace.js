@@ -16,9 +16,11 @@ export default function Marketplace({ props1 }) {
 
     useEffect(()=>{
       try {
-        api.get(`/vendorItem/${type}`)
-            .then(response =>
+        api.get(`/vendoritem/type/${type}`)
+            .then(response =>{
               setItems(response.data.vendoritem)
+              console.log(response.data.vendoritem)
+            }
             )
             .catch(error=>
               console.log(error)

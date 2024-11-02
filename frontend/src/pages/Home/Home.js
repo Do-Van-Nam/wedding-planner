@@ -3,7 +3,7 @@ import axios from 'axios'
 import Sidebar from '../../components/Sidebar/Sidebar'
 import Header from '../../components/Header/Header'
 import { AppContext } from '../../AppContext'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 import api from '../../api'
 import BuildingPopup from '../../components/BuildingPopup'
@@ -81,13 +81,23 @@ const [plan1,setPlan1] = useState({})
     const [selectVendorPopup, setSelectVendorPopup] = useState(false)
     const [vendorType, setVendorType] = useState('')
     useEffect(() => {
+        if (acc && acc._id) { 
+            api.get(`/plan/${acc._id}`)
+                .then((response) => {
+                    setPlan(response.data.plan);
+                    console.log("Dữ liệu plan:", response.data.plan); 
+                })
+                .catch(error => console.log(error));
+        }
+    }, [acc]);
+        useEffect(() => {
         api.get(`/plan/${acc._id}`)
             .then((response) => {
                 setPlan(response.data.plan)
-                setPlan1(response.data.plan)
+                
             })
             .catch(error => console.log(error))
-    }, [])
+    }, [acc._id])
     useEffect(() => {
         api.get(`/plan/${acc._id}`)
             .then((response) => {
@@ -95,7 +105,7 @@ const [plan1,setPlan1] = useState({})
                 setPlan1(response.data.plan)
             })
             .catch(error => console.log(error))
-    }, [acc._id, editWeddingInfoVisible])
+    }, [editWeddingInfoVisible])
     const SelectVendorPopup = () => (
         <div className='position-fixed top-50 start-50 translate-middle shadow bg-body-tertiary rounded
     d-flex flex-column justify-content-center align-items-center
@@ -215,7 +225,7 @@ const [plan1,setPlan1] = useState({})
         const year = date.getFullYear();
 
         // Tạo chuỗi theo định dạng mong muốn
-        return `ngày ${day} tháng ${month} năm ${year}`;
+        return `Ngày ${day} tháng ${month} năm ${year}`;
     };
     const noDaysUtilEvent = () => {
         if (!plan) return 0
@@ -231,9 +241,9 @@ const [plan1,setPlan1] = useState({})
         <div class=' d-flex flex-wrap justify-content-evenly align-items-start'
             style={{ padding: '0', margin: '0', border: '0', backgroundColor: "#f1ece4" }}>
 
-{plan&&
+
             <EditWeddingInfo isVisible={editWeddingInfoVisible} onClose={closeEditWeddingInfo} acc={acc} plan={plan}/>
-}
+
 
             {/* <AddVendorItem isVisible={addVenueVisible} onClose={closeAddVenue} type={'venue'}/> */}
             <AddVendorItem isVisible={addVendorItemVisible} onClose={closeAddVendorItem} type={type} />
@@ -242,11 +252,13 @@ const [plan1,setPlan1] = useState({})
                 style={{ cursor: 'pointer', backgroundColor: "#f1ece4", width: '90vw', maxWidth: '90vw', marginTop: '15vh' }}
                 onClick={() => setEditWeddingInfoVisible(true)}
             >
-                <h3>{noDaysUtilEvent()} DAYS TO GO!</h3>
-                <h1>{acc.name} & {plan.partner}</h1>
+          <img src='images/heartShape.png' class=" me-2" alt="..." style={{ height: '50px', width: 'auto' }}></img>
+
+                <h3>{noDaysUtilEvent()} ngày tới ngày cưới!</h3>
+                <h1>{acc.name} <i class="bi bi-heart-fill" style={{fontSize:'30px',color:'#ff44cb'}}></i> {plan?.partner||""}</h1>
                 <div className='d-flex'>
-                    <div className='me-3'>{formatDate(plan.date)}</div>
-                    <div>{plan.location}</div>
+                    <div className='me-3'>{formatDate(plan?.date||null)}</div>
+                    <div>{plan?.location||""}</div>
 
                 </div>
             </div>
@@ -266,21 +278,31 @@ const [plan1,setPlan1] = useState({})
                         overflow: 'hidden',
                         transition: 'max-height 1s ease-in-out',
                     }}>
-                    <div className='d-flex justify-content-between align-items-center'>
-                        <div
+                    <div className='d-flex justify-content-between align-items-center' style={{width:'100%'}}>
+                        <div className='d-flex justify-content-between'
                             style={{ fontSize: '24px', fontWeight: '600', paddingBottom: '10px' }}
                         >
-                            Ngân sách
+Ngân sách
+                               
+                            
                         </div>
-
+                        <Link to={'/budget'}>
+                        
+                        
+                        <button type="button" className="btn btn-lg rounded-pill"
+                            style={{ boxSizing: 'border-box', backgroundColor: '#ff44cb', color: 'white', fontWeight: '500', padding: '10px 20px' }}>
+                            Chi tiết
+                        </button>
+                        </Link>
                     </div>
 
 
 
                     <div className='d-flex  align-items-center justify-content-around'>
+                    
                         <div style={{ fontSize: '24px', color: '#ff44cb', textAlign: 'center' }}>
                             Ngân sách dự kiến<br></br>
-                            1234300 d
+                            {plan?.budget?.toLocaleString('vi-VN')|| 0} đ
                         </div>
                         <div style={{ fontSize: '24px', color: '#ff44cb', textAlign: 'center' }}>
                             Đã sử dụng <br />
@@ -304,10 +326,14 @@ const [plan1,setPlan1] = useState({})
                         >
                             Địa điểm
                         </div>
+                        <Link to={'/marketplace/venue'}>
+                        
+                        
                         <button type="button" className="btn btn-lg rounded-pill"
                             style={{ boxSizing: 'border-box', backgroundColor: '#ff44cb', color: 'white', fontWeight: '500', padding: '10px 20px' }}>
                             Tìm địa điểm
                         </button>
+                        </Link>
                     </div>
 
                     <div style={{ fontSize: '16px', color: '#555', marginBottom: '10px' }}>
@@ -316,9 +342,10 @@ const [plan1,setPlan1] = useState({})
 
                     <div className='d-flex justify-content-between align-items-center' style={{ marginBottom: '10px' }}>
                         <div style={{ fontSize: '14px', fontWeight: '700', color: '#333' }}>Khám phá các địa điểm</div>
-                        <a href="" style={{ fontSize: '14px', color: '#ff44cb' }}>
+                        
+                        <Link to={'/marketplace/venue'} style={{ fontSize: '14px', color: '#ff44cb' }}>
                             Xem tất cả
-                        </a>
+                        </Link>
                     </div>
 
                     <div className='location-info d-flex flex-column align-items-center' style={{ marginBottom: '10px' }}>
@@ -353,10 +380,12 @@ const [plan1,setPlan1] = useState({})
                         >
                             Trang phục và Nhẫn cưới
                         </div>
+                        <Link to={'/marketplace/rings'}>
                         <button type="button" className="btn btn-lg rounded-pill"
                             style={{ backgroundColor: '#ff44cb', color: 'white', fontWeight: '500', padding: '10px 20px' }}>
                             Tìm Trang phục và Nhẫn
                         </button>
+                        </Link>
                     </div>
 
                     <div style={{ fontSize: '16px', color: '#555', marginBottom: '10px' }}>
@@ -365,9 +394,9 @@ const [plan1,setPlan1] = useState({})
 
                     <div className='d-flex justify-content-between align-items-center' style={{ marginBottom: '10px' }}>
                         <div style={{ fontSize: '14px', fontWeight: '700', color: '#333' }}>Khám phá các Trang phục và Nhẫn</div>
-                        <a href="javascript:void(0);" style={{ fontSize: '14px', color: '#ff44cb' }}>
+                        <Link to={'/marketplace/rings'} href="javascript:void(0);" style={{ fontSize: '14px', color: '#ff44cb' }}>
                             Xem tất cả
-                        </a>
+                        </Link>
                     </div>
 
                     <div className='location-info d-flex flex-column align-items-center' style={{ marginBottom: '10px' }}>
@@ -405,10 +434,12 @@ const [plan1,setPlan1] = useState({})
                         >
                             Nhà cung cấp
                         </div>
+                        <Link to={'/marketplace/venue'}>
                         <button type="button" className="btn btn-lg rounded-pill"
                             style={{ backgroundColor: '#ff44cb', color: 'white', fontWeight: '500', padding: '10px 20px' }}>
                             Tìm Nhà cung cấp
                         </button>
+                        </Link>
                     </div>
 
                     <div style={{ fontSize: '16px', color: '#555', marginBottom: '10px' }}>
@@ -417,9 +448,9 @@ const [plan1,setPlan1] = useState({})
 
                     <div className='d-flex justify-content-between align-items-center' style={{ marginBottom: '10px' }}>
                         <div style={{ fontSize: '14px', fontWeight: '700', color: '#333' }}>Khám phá các Nhà cung cấp</div>
-                        <a href="javascript:void(0);" style={{ fontSize: '14px', color: '#ff44cb' }}>
+                        <Link to={'/marketplace/venue'} href="javascript:void(0);" style={{ fontSize: '14px', color: '#ff44cb' }}>
                             Xem tất cả
-                        </a>
+                        </Link>
                     </div>
 
                     <div className='location-info d-flex flex-wrap align-items-center' style={{ marginBottom: '10px', width: '100%' }}>

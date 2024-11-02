@@ -5,8 +5,8 @@ import api from '../../api';
 
 export default function EditWeddingInfo({ isVisible, onClose,acc,plan}) {
 
-  // const {plan} = useContext(AppContext)
-  console.log(acc,plan, plan.partner)
+  
+  // console.log(acc,plan, plan.partner)
   const [name,setName] = useState(acc?.name||"")
   const [partner,setPartner] = useState(plan?.partner||"")
   const [location,setLocation] = useState(plan?.location||"")
@@ -15,10 +15,11 @@ export default function EditWeddingInfo({ isVisible, onClose,acc,plan}) {
   const [date, setDate] = useState(plan?.date ? plan.date.slice(0, 10) : ""); 
   // const [date,setDate] = useState("2024-12-24")
   useEffect(() => {
+    setName(acc?.name||"")
     setPartner(plan?.partner || "");
     setLocation(plan?.location || "");
     setDate(plan?.date ? plan.date.slice(0, 10) : "")
-}, [plan]);
+}, [acc,plan]);
 
 
 

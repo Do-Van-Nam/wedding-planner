@@ -9,7 +9,9 @@ const Plan=new Schema({
     location:{type:String},
     partner:{type:String},
     vendors:[
-        {type:String}
+        {vendorType:{type:String},
+            vendorId: {type:String}
+        }
     ]
 })
 

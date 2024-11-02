@@ -4,6 +4,7 @@ import { Route, Routes, useLocation } from 'react-router-dom'
 import LoginRegister from './pages/LoginRegister'
 import Home from './pages/Home/Home'
 import Marketplace from './pages/Marketplace'
+import Favourite from './pages/Favourite'
 import Rooms from './pages/Rooms/Rooms'
 import Problems from './pages/Problems/Problems'
 import Statistics from './pages/Statistics/Statistics'
@@ -31,6 +32,7 @@ function App() {
           <Route path='/manager/statistics' element={<Statistics />} />
           <Route path='/marketplace/*' element={<Marketplace />} />
           <Route path='/checklist' element={<Checklist/>} />
+          <Route path='/favourite' element={<Favourite/>} />
           <Route path='/budget'  />
     
 

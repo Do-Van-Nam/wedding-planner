@@ -7,6 +7,7 @@ import BuildingPopup from '../BuildingPopup';
 import Cookies from 'js-cookie'
 import ExpandedHeader from './ExpandedHeader';
 import style from './Header.module.css'
+import { Link } from 'react-router-dom';
 
 export default function Header() {
   const navigate = useNavigate()
@@ -157,7 +158,7 @@ export default function Header() {
     " style={{ width: '100vw', zIndex: '999', height: '10vh' }}>
         <div className='d-flex align-items-center' style={{ height: '100%' }}>
 
-          <img src='images/flower.png' class="img-thumbnail me-2" alt="..." style={{ height: '50px', width: 'auto' }}></img>
+          <img src='images/flower.png' class=" me-2" alt="..." style={{ height: '50px', width: 'auto' }}></img>
           <div className='d-flex flex-column' >
             <div>
               Wedding Planner
@@ -167,7 +168,9 @@ export default function Header() {
               <h4 className={`me-3 ${style.headeritem}`} onClick={() => toggleExpanded('vendors')} >Nhà cung cấp</h4>
               <h4 className={`me-3 ${style.headeritem}`} onClick={() => toggleExpanded('attireAndRings')} >Trang phục, Nhẫn</h4>
               <h4 className={`me-3 ${style.headeritem}`}>Lập kế hoạch tự động</h4>
+              <Link to={'/favourite'} style={{ textDecoration: 'none', color: 'inherit' }}> 
               <h4 className={`me-3 ${style.headeritem}`}>Yêu thích</h4>
+              </Link>
             </div>
 
 
@@ -177,7 +180,7 @@ export default function Header() {
         <div className='d-flex align-items-center'>
           <i class="bi bi-chat me-3" style={{ fontSize: '20px' }}></i>
           <div className='d-flex flex-column'>
-            <div className='' style={{ fontSize: '25px' }}>Account</div>
+            <div className='' style={{ fontSize: '25px' }}>{acc.name}</div>
             <div className='' style={{ cursor: 'pointer' }} onClick={logOut}>Đăng xuất</div>
 
           </div>
