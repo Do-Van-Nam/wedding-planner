@@ -178,7 +178,10 @@ export default function Header() {
         </div>
 
         <div className='d-flex align-items-center'>
+          <Link to={'/message'} style={{textDecoration:'none',color:'inherit'}}>
+          
           <i class="bi bi-chat me-3" style={{ fontSize: '20px' }}></i>
+          </Link>
           <div className='d-flex flex-column'>
             <div className='' style={{ fontSize: '25px' }}>{acc.name}</div>
             <div className='' style={{ cursor: 'pointer' }} onClick={logOut}>Đăng xuất</div>

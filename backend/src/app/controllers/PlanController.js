@@ -125,7 +125,7 @@ const checkVendorInPlan = async (req,res)=>{
     const {vendorId}  =req.body
 try {
     let plan = await Plan.findOne({accId})
-    if(plan.vendors.includes(vendorId)){
+    if(plan.vendors.find(vendor=>vendor.vendorId===vendorId)){
         return res.status(200).json({exists:true})
     }
     else  return res.status(200).json({exists:false})
@@ -134,6 +134,7 @@ try {
     return res.status(500).json({ message: 'Server error' });
 }
 }
+
 module.exports = {
     getPlanByAccId,
     getPlanById,

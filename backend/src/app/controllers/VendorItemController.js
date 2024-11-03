@@ -1,4 +1,5 @@
 const VendorItem = require('../models/VendorItem');
+const Plan = require('../models/Plan');
 const Review = require('../models/Review');
 
 // Lấy danh sách VendorItems theo accId
@@ -117,7 +118,33 @@ const deleteVendorItem = async (req, res) => {
         return res.status(500).json({ message: 'Server error' });
     }
 };
+const getVendorItemByPlanGroupByType=async (req,res)=>{
+    const {accId}  =req.params
+    try {
+        const plan = await  Plan.findOne({accId})
+        if(!plan ) return res.status(404).json({message:"plan not found"})
+        
+        const vendorPromises = plan.vendors.map(e=>VendorItem.findById(e.vendorId))
+        const vendorsData  = await Promise.all(vendorPromises)
+        
+        const groupedVendors = vendorsData.reduce((result,vendor)=>{
+            if(vendor){
+                const {type } = vendor 
+                if(!result[type]){
+                    result[type]={}
+                }
+                result[type]=vendor
+            }
+            return result
+        },{})
+        return res.status(200).json(groupedVendors)
 
+
+    } catch (error) {
+        
+    }
+
+}
 module.exports = {
     getVendorItemsByAccId,
     getVendorItemById,
@@ -125,5 +152,6 @@ module.exports = {
     createVendorItem,
     updateVendorItem,
     deleteVendorItem,
-    createManyVendorItems
+    createManyVendorItems,
+    getVendorItemByPlanGroupByType
 };

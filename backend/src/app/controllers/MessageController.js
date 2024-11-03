@@ -10,7 +10,16 @@ const getMessagesByAccId = async (req, res) => {
         return res.status(400).json({ message: 'Server error' })
     }
 }
-
+const getMessagesByChatRoomId = async (req, res) => {
+    const chatRoomId = req.params.chatRoomId
+    try {
+        let messages = await Message.find({ chatRoomId })
+        return res.status(200).json({ messages })
+    } catch (error) {
+        console.log(error)
+        return res.status(400).json({ message: 'Server error' })
+    }
+}
 // Lấy thông tin Message theo id
 const getMessageById = async (req, res) => {
     const { id } = req.params;
@@ -83,8 +92,22 @@ const deleteMessage = async (req, res) => {
         return res.status(500).json({ message: 'Server error' });
     }
 };
+const createMultipleMessages = async (req, res) => {
+    const { messages } = req.body 
+        try {
+        
+        const createdMessages = await Message.insertMany(messages);
+
+        return res.status(201).json({ messages: createdMessages });
+    } catch (error) {
+        console.log(error);
+        return res.status(400).json({ message: 'Server error' });
+    }
+};
 
 module.exports = {
+    createMultipleMessages,
+    getMessagesByChatRoomId,
     getMessagesByAccId,
     getMessageById,
     createMessage,

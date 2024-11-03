@@ -76,39 +76,39 @@ export default function Favourite() {
   return (
     <div className='d-flex flex-wrap' style={{ padding: '8vw' }}>
       {vendorType.map(vendor => {
-          const filteredVendors = vendors.filter(e => e.type === vendor.type); // Lọc các vendor theo type
+        const filteredVendors = vendors.filter(e => e.type === vendor.type); // Lọc các vendor theo type
 
-          return (<>
-          
-          
-            <h3 style={{width:'100%'}}>{vendor.vendor}</h3>
-        {filteredVendors.length>0 ? (
-filteredVendors
-  .map((e, i) => (
+        return (<>
 
-  <VendorItem key={i} props={e} />
-))
 
-        ): (
-          <div className='d-flex flex-column align-items-center' style={{width:"100%"}}>
-<div className='mt-3 mb-3' style={{fontSize:'1.3rem'}}>Bạn chưa thêm {vendor.vendor}</div>
-<button type="button" className="btn btn-lg rounded-pill "
-        style={{
-          backgroundColor: '#ff44cb',
-          color: 'white',
-          fontWeight: '500',
-          fontSize: '16px',
-          padding: '10px 20px',
-          width: ''
-        }}>
-        Tìm thêm
-      </button>
-          </div>  
+          <h3 style={{ width: '100%' }}>{vendor.vendor}</h3>
+          {filteredVendors.length > 0 ? (
+            filteredVendors
+              .map((e, i) => (
 
-        ) }
-            
-          </>
-      )
+                <VendorItem key={i} props={e} />
+              ))
+
+          ) : (
+            <div className='d-flex flex-column align-items-center' style={{ width: "100%" }}>
+              <div className='mt-3 mb-3' style={{ fontSize: '1.3rem' }}>Bạn chưa thêm {vendor.vendor}</div>
+              <button type="button" className="btn btn-lg rounded-pill "
+                style={{
+                  backgroundColor: '#ff44cb',
+                  color: 'white',
+                  fontWeight: '500',
+                  fontSize: '16px',
+                  padding: '10px 20px',
+                  width: ''
+                }}>
+                Tìm thêm
+              </button>
+            </div>
+
+          )}
+
+        </>
+        )
       })}
 
     </div>

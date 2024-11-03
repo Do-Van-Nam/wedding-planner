@@ -11,6 +11,8 @@ import Statistics from './pages/Statistics/Statistics'
 import Header from './components/Header/Header';
 import Sidebar from './components/Sidebar/Sidebar';
 import Checklist from './pages/Checklist';
+import Message from './pages/Message';
+
 import api from './api';
 import PrivateRoute from './PrivateRoute';
 
@@ -33,6 +35,7 @@ function App() {
           <Route path='/marketplace/*' element={<Marketplace />} />
           <Route path='/checklist' element={<Checklist/>} />
           <Route path='/favourite' element={<Favourite/>} />
+          <Route path='/message' element={<Message/>} />
           <Route path='/budget'  />
     
 

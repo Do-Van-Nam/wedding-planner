@@ -1,10 +1,25 @@
 const ChatRoom = require('../models/ChatRoom')
+const Account = require('../models/Account')
+
 
 const getChatRoomByAccId = async (req, res) => {
-    const accId = req.params.accId
+    const {accId} = req.params
     try {
-        let chatroom = await ChatRoom.findOne({ $or: [{ user1Id: accId }, { user2Id: accId }] })
-        return res.status(200).json({ chatroom })
+        let chatrooms = await ChatRoom.find({ $or: [{ user1Id: accId }, { user2Id: accId }] })
+
+        const otherUsers = chatrooms.map((chatroom) => ({
+            userId: chatroom.user1Id === accId ? chatroom.user2Id : chatroom.user1Id,
+            chatRoomId: chatroom._id
+        })).filter(Boolean);
+
+        const userPromises = otherUsers.map(e => Account.findById(e.userId))
+        var userData = await Promise.all(userPromises)
+        userData = userData.map((e, i) => {
+            e = e.toObject()
+            e.chatRoomId = otherUsers[i].chatRoomId
+            return e
+        } )
+        return res.status(200).json({ users: userData })
     } catch (error) {
         console.log(error)
         return res.status(400).json({ message: 'Server error' })
