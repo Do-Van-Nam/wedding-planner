@@ -6,7 +6,7 @@ const authMiddleware = require('../app/middlewares/authMiddleware')
 
 // router.get('/:id', getGuestById)
 router.get('/:accId',getGuestByAccId)
-router.post('/', createGuest)
+router.post('/:accId', createGuest)
 router.put('/:id', updateGuest)
 router.delete('/:id', deleteGuest)
 

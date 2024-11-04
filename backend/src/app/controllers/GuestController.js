@@ -4,6 +4,7 @@ const getGuestByAccId=async (req,res)=>{
     const accId= req.params.accId
 try {
     let guest = await Guest.findOne({ accId })
+    if(!guest) return res.status(404).json({ guest: 'Guest not found' });
     return res.status(200).json({guest})
 } catch (error) {
     console.log(error)
@@ -28,17 +29,22 @@ const getGuestById = async (req, res) => {
 
 // Tạo mới Guest
 const createGuest = async (req, res) => {
-    const { planId,    guestList  } = req.body;
+    const {accId} = req.params
+    const {     guestList  } = req.body;
     try {
-        const existingGuest = await Guest.findOne({  planId });
+        const existingGuest = await Guest.findOne({  accId });
         if (existingGuest) {
-            return res.status(400).json({ guest: 'Guest already exists!' });
+            existingGuest.guestList.push(...guestList)
+            await existingGuest.save();
+            return res.status(200).json({ message: 'Guests added successfully', guest: existingGuest });
+        }else{
+
+            const newGuest = new Guest({accId,    guestList });
+    
+            await newGuest.save();
+            res.status(201).json({ guest: newGuest });
         }
 
-        const newGuest = new Guest({planId,    guestList });
-
-        await newGuest.save();
-        res.status(201).json({ guest: newGuest });
     } catch (error) {
         console.error('Error creating vendor item:', error);
         return res.status(500).json({ guest: 'Server error' });
@@ -48,11 +54,11 @@ const createGuest = async (req, res) => {
 // Cập nhật thông tin Guest theo id
 const updateGuest = async (req, res) => {
     const { id } = req.params;
-    const {planId,    guestList } = req.body;
+    const {accId,    guestList } = req.body;
     try {
         const updatedGuest = await Guest.findByIdAndUpdate(
             id,
-            {planId,    guestList },
+            {accId,    guestList },
             { new: true }
         );
 
@@ -89,5 +95,6 @@ module.exports = {
     getGuestById,
     createGuest,
     updateGuest,
-    deleteGuest
+    deleteGuest,
+    
 };

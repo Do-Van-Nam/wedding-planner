@@ -36,6 +36,7 @@ function App() {
           <Route path='/checklist' element={<Checklist/>} />
           <Route path='/favourite' element={<Favourite/>} />
           <Route path='/message' element={<Message/>} />
+          <Route path='/guests' element={<Rooms/>} />
           <Route path='/budget'  />
     
 

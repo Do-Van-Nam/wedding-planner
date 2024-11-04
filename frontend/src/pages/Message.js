@@ -8,7 +8,7 @@ export default function Message() {
   const [messages, setMessages] = useState([]);
   const [chosenChat, setChosenChat] = useState(-1);
   const messagesEndRef = useRef(null);
-
+  const [chatMessage,setChatMessage]  = useState("")
   useEffect(() => {
     try {
       api.get(`/chatroom/${acc._id}`)
@@ -35,7 +35,21 @@ export default function Message() {
       console.log(error);
     }
   };
+const handleSendMessage = async()=>{
+  try {
+    const response  = await api.post(`/message/`,{
+      chatRoomId : chatters[chosenChat].chatRoomId,
+      senderId: acc._id,
+      content: chatMessage,
+      createdAt: new Date()
 
+    })
+    setMessages(prevMessages=>[...prevMessages,response.data.message])
+    setChatMessage("")
+  } catch (error) {
+    console.log(error)
+  }
+}
   return (
     <div className='d-flex position-relative' style={{ height: '100vh', width: '100vw',maxWidth:'100vw' }}>
       <div className='border border-black d-flex flex-column' style={{ width: '25%', height: '100%', paddingTop: '100px' }}>
@@ -73,8 +87,12 @@ export default function Message() {
             className="form-control border border-black mb-4"
             aria-label="Sizing example input"
             aria-describedby="inputGroup-sizing-lg"
+            onChange={(e)=>setChatMessage(e.target.value)}
+            value={chatMessage}
           />
-          <span className="input-group-text bg-white border border-black mb-4">
+          <span className="input-group-text bg-white border border-black mb-4"
+          onClick={handleSendMessage}
+          >
             <i className="bi bi-send"></i>
           </span>
         </div>

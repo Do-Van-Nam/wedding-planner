@@ -39,7 +39,7 @@ const getMessageById = async (req, res) => {
 const createMessage = async (req, res) => {
     const { chatRoomId, senderId, content, createdAt } = req.body;
     try {
-        const existingMessage = await Message.findOne({ chatRoomId, senderId });
+        const existingMessage = await Message.findOne({ chatRoomId, senderId,createdAt });
         if (existingMessage) {
             return res.status(400).json({ message: 'Message already exists!' });
         }

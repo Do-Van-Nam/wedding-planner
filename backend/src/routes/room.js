@@ -4,7 +4,7 @@ const {deleteRoomByBuildingId,deleteRoomOnOneFloor, getRoomsByBuildingId,getRoom
 const managerAuthMiddleware = require('../app/middlewares/managerAuthMiddleware')
 
 // router.get('/:id', getRoomById)
-router.get('/:buildingId',managerAuthMiddleware, getRoomsByBuildingId)
+router.get('/:buildingId', getRoomsByBuildingId)
 router.put('/:id', updateRoom)
 router.post('/', createRoom)
 router.post('/quickCreate',managerAuthMiddleware, quickCreateRooms)
