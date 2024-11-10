@@ -5,7 +5,17 @@ const bcrypt = require('bcryptjs');
 const getAccs = async (req, res) => {
     try {
         const accs = await Account.find({})
-        res.json({ accs: accs })
+        return res.status.json({ accs: accs })
+    } catch (error) {
+        console.log(error)
+        return res.status(400).json({ message: 'Server error' })
+    }
+}
+const getAccById = async (req, res) => {
+    const {accId} = req.params
+    try {
+        const acc = await Account.findById(accId)
+        return res.status(200).json({ user: acc })
     } catch (error) {
         console.log(error)
         return res.status(400).json({ message: 'Server error' })
@@ -78,7 +88,34 @@ const deleteAcc  = async (req,res)=>{
 }
 
 const checkAuth= async (req,res)=>{
-    res.json({user:req.user})
+   return  res.status(200).json({user:req.user})
 }
+const updateAccountField = async (req, res) => {
+    const { accId } = req.params; 
+    const { field, value } = req.body; 
 
-module.exports = { getAccs, createAcc , updateAcc ,deleteAcc,checkAuth }
+    // Kiểm tra xem trường 'field' có hợp lệ không
+    // const allowedFields = ['location', 'budget', 'partner', 'date', 'vendors']; // Các trường hợp lệ có thể sửa
+    // if (!allowedFields.includes(field)) {
+    //     return res.status(400).json({ message: 'Invalid field to update' });
+    // }
+
+    try {
+        const updatedAcc = await Account.findByIdAndUpdate(
+            accId,
+            { [field]: value }, // Dùng cú pháp computed property để cập nhật trường động
+            { new: true } // Trả về bản ghi đã cập nhật
+        );
+
+        if (!updatedAcc) {
+            return res.status(404).json({ message: 'ACC not found' });
+        }
+
+        res.json({ updatedAcc });
+    } catch (error) {
+        console.error('Error updating plan:', error);
+        return res.status(500).json({ message: 'Server error' });
+    }
+};
+
+module.exports = {getAccById,updateAccountField, getAccs, createAcc , updateAcc ,deleteAcc,checkAuth }
